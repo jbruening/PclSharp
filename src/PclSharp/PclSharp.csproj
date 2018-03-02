@@ -55,6 +55,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,6 +68,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Native.cs" />
+    <Compile Include="PointCloud.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointCloudOfXYZ.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointCloudOfXYZRGBA.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Std\VectorOfByte.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
@@ -76,12 +91,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
+    <Compile Include="Struct\PointTypes.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="InvokeTemplate.ttinclude" />
     <None Include="Manager.ttinclude" />
+    <None Include="packages.config" />
     <None Include="Std\VectorOfStruct.t4" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PointCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PointCloud.cs</LastGenOutput>
+    </Content>
     <Content Include="Std\VectorOfStruct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorOfStruct.cs</LastGenOutput>
@@ -89,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="..\PclSharp.Extern\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

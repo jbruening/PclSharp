@@ -1,0 +1,134 @@
+﻿<#@ assembly name="System.Core"
+#><#@ assembly name="System.Data.Linq"
+#><#@ assembly name="EnvDTE"
+#><#@ assembly name="System.Xml"
+#><#@ assembly name="System.Xml.Linq"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="System.IO"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="Microsoft.VisualStudio.TextTemplating"
+#><#+
+class InvokeT
+{
+	class InvokeParts
+	{
+		public string ret;
+		public string name;
+		public string parms;
+
+		public InvokeParts(string ret, string name, string parms)
+		{
+			this.ret = ret;
+			this.name = name;
+			this.parms = parms;
+		}
+	}
+
+	private string def = "[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]\r\n		public static extern";
+	private string _ = "_";
+	private string funcPrefix;
+	private string csClass;
+	private string cppPrefix;
+	private Dictionary<string, InvokeParts> _dict = new Dictionary<string, InvokeParts>();
+	private Dictionary<string, string> _vars = new Dictionary<string, string>();
+
+	public InvokeT(string funcPrefix, string csClass, string cppPrefix)
+	{
+		this.funcPrefix = funcPrefix;
+		this.csClass = csClass;
+		this.cppPrefix = cppPrefix;
+
+		Var("cppPrefix", cppPrefix);
+		Var("csClass", csClass);
+	}
+
+	public void Var(string key, string value)
+	{
+		_vars[key] = value;
+	}
+
+	private void ReplaceVars(ref string str)
+	{
+		foreach(var kvp in _vars)
+			str = str.Replace(kvp.Key, kvp.Value);
+	}
+	private void InstanceParms(ref string parms)
+	{
+		parms = string.IsNullOrWhiteSpace(parms) ? "" : ", "+parms;
+	}
+
+	public string Ctor()
+	{ return Func("IntPtr", "ctor", "");}
+
+	public string Delete()
+	{ return Func("void", "delete", "ref IntPtr ptr"); }
+
+	public string Func(string name)
+	{ return Func("void", name, ""); }
+
+	public string Func(string name, string parms)
+	{ return Func("void", name, parms);	}
+
+	public string Func(string ret, string name, string parms)
+	{
+		ReplaceVars(ref parms);
+		ReplaceVars(ref ret);
+		return string.Format("{0} {1} {2}{3}{4}({5});", def, ret, funcPrefix, _, name, parms);
+	}
+
+	public string FuncI(string name)
+	{ return FuncI(name, ""); }
+
+	public string FuncI(string name, string parms)
+	{ return FuncI("void", name, parms); }
+
+	public string FuncI(string ret, string name, string parms)
+	{
+		InstanceParms(ref parms);
+		ReplaceVars(ref parms);
+		ReplaceVars(ref ret);
+		return string.Format("{0} {1} {2}{3}{4}(IntPtr ptr{5});", def, ret, funcPrefix, _, name, parms);
+	}
+
+	public string Invoke(string name)
+	{
+		return Invoke(name, "");
+	}
+
+	public string Invoke(string name, string parms)
+	{
+		ReplaceVars(ref parms);
+		return string.Format("Invoke.{0}{1}{2}({3})", funcPrefix, _, name, parms);
+	}
+
+	public string InvokeI(string name)
+	{
+		return InvokeI(name, "");
+	}
+
+	public string InvokeI(string name, string parms)
+	{
+		InstanceParms(ref parms);
+		ReplaceVars(ref parms);
+		return string.Format("Invoke.{0}{1}{2}(_ptr{3})", funcPrefix, _, name, parms);
+	}
+
+	public string DeleteI()
+	{ return Invoke("delete", "ref _ptr");}
+
+	public string Export(string ret, string name, string parms)
+	{
+		ReplaceVars(ref parms);
+		ReplaceVars(ref ret);
+		return "EXPORT("+ret+") "+funcPrefix+_+name+"("+parms+")";
+	}
+
+	public string ExportI(string ret, string name, string parms)
+	{
+		InstanceParms(ref parms);
+		ReplaceVars(ref parms);
+		ReplaceVars(ref ret);
+		return "EXPORT("+ret+") "+funcPrefix+_+name+"("+cppPrefix+"* ptr"+parms+")";
+	}
+}
+#>

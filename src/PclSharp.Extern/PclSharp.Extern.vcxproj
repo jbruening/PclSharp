@@ -128,11 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="common.h" />
     <ClInclude Include="export.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="std\*.h" />
+    <ClCompile Include="pointcloud\*.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

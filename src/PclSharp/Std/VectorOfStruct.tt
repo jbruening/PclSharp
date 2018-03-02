@@ -5,16 +5,23 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@include file="..\Manager.ttinclude"#>
+<#@include file="..\InvokeTemplate.ttinclude"#>
 <# 
 	var manager = Manager.Create(Host, GenerationEnvironment);
 	string ClassName;
+	string csClass;
+	string cppClass;
 #>
 <#
 	ClassName = "Int";
+	csClass = "int";
+	cppClass = "int";
 #>
 <#@ include file="VectorOfStruct.t4" #>
 <#
 	ClassName = "Byte";
+	csClass = "byte";
+	cppClass = "unsigned char";
 #>
 <#@ include file="VectorOfStruct.t4" #>
 <# manager.Process(true); #>

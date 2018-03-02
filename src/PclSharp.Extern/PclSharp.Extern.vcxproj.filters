@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="export.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -27,9 +24,17 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\VectorOfByte.generated.h">
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
     <ClCompile Include="std\VectorOfInt.generated.h" />
     <ClCompile Include="std\folder.h">
       <Filter>Header Files</Filter>
@@ -46,5 +51,8 @@
     </ClCompile>
     <ClCompile Include="std\VectorOfByte.generated.h" />
     <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="pointcloud\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
