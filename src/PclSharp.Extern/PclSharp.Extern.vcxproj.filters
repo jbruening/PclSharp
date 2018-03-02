@@ -31,9 +31,20 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\VectorOfByte.generated.h">
+    <ClCompile Include="std\folder.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
     <ClCompile Include="std\VectorOfInt.generated.h" />
   </ItemGroup>
 </Project>
