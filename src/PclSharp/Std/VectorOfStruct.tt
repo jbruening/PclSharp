@@ -15,12 +15,15 @@
 
 	outputClass(manager, "Int", "int", "int", new VectorParms());
 	outputClass(manager, "Byte", "byte", "unsigned char", new VectorParms());
-	outputClass(manager, "XYZ", "Vector3", "PointXYZ", new VectorParms
+
+	var pointParms= new VectorParms
 	{
-		Namespaces = new[]{"System.Numerics"},
+		Namespaces = new[]{"System.Numerics", "PclSharp.Struct"},
 		Includes = new[]{"pcl\\point_types.h"},
 		CppNamespaces = new[]{"pcl"}
-	});
+	};
+	outputClass(manager, "XYZ", "Vector3", "PointXYZ", pointParms);
+	outputClass(manager, "XYZRGBA", "PointXYZRGBA", "PointXYZRGBA", pointParms);
 
 
 	manager.Process(true);

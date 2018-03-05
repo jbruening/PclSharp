@@ -105,6 +105,9 @@
     <Compile Include="Std\VectorOfXYZ.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
+    <Compile Include="Std\VectorOfXYZRGBA.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
     <Compile Include="Struct\PointTypes.cs" />
   </ItemGroup>
   <ItemGroup>
