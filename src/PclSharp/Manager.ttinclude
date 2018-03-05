@@ -8,6 +8,14 @@
 #><#@ import namespace="System.Text"
 #><#@ import namespace="Microsoft.VisualStudio.TextTemplating"
 #><#+
+class VectorParms
+{
+	public string cppVector;
+	public string[] Namespaces = new string[0];
+	public string[] Includes = new string[0];
+	public string[] CppNamespaces = new string[0];
+}
+
 // https://raw.github.com/damieng/DamienGKit
 // http://damieng.com/blog/2009/11/06/multiple-outputs-from-t4-made-easy-revisited
 
