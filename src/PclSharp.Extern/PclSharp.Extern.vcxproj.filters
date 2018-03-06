@@ -20,39 +20,189 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="std\VectorOfByte.generated.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="std\VectorOfInt.generated.h" />
     <ClCompile Include="std\VectorOfByte.generated.h" />
     <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\folder.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="std\VectorOfByte.generated.h" />
-    <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\folder.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="std\VectorOfByte.generated.h" />
-    <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\folder.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="std\VectorOfByte.generated.h" />
-    <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\folder.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="std\VectorOfByte.generated.h" />
-    <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\folder.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="std\VectorOfByte.generated.h" />
     <ClCompile Include="std\VectorOfInt.generated.h" />
     <ClCompile Include="pointcloud\*.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="sampleconsensus\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="features\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="std\folder.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\VectorOfByte.generated.h" />
+    <ClCompile Include="std\VectorOfInt.generated.h" />
+    <ClCompile Include="std\VectorOfXYZ.generated.h" />
+    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
+    <ClCompile Include="pointcloud\PointCloudOfXYZ.generated.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pointcloud\PointCloudOfXYZRGBA.generated.h" />
   </ItemGroup>
 </Project>

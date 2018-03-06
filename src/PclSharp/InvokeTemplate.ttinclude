@@ -8,7 +8,7 @@
 #><#@ import namespace="System.Text"
 #><#@ import namespace="Microsoft.VisualStudio.TextTemplating"
 #><#+
-class InvokeT
+class InvokeT : IDisposable
 {
 	class InvokeParts
 	{
@@ -29,6 +29,7 @@ class InvokeT
 	private string funcPrefix;
 	private string csClass;
 	private string cppPrefix;
+	private HashSet<string> _funcs = new HashSet<string>();
 	private Dictionary<string, InvokeParts> _dict = new Dictionary<string, InvokeParts>();
 	private Dictionary<string, string> _vars = new Dictionary<string, string>();
 
@@ -40,6 +41,14 @@ class InvokeT
 
 		Var("cppPrefix", cppPrefix);
 		Var("csClass", csClass);
+	}
+
+	public void Dispose()
+	{
+		if (_funcs.Count > 0)
+		{
+			throw new Exception("for " + funcPrefix +", the following methods were not exported:\n" + string.Join(", ", _funcs) + "\nThis will cause run-time errors if not corrected");
+		}
 	}
 
 	public void Var(string key, string value)
@@ -73,6 +82,7 @@ class InvokeT
 	{
 		ReplaceVars(ref parms);
 		ReplaceVars(ref ret);
+		_funcs.Add(name);
 		return string.Format("{0} {1} {2}{3}{4}({5});", def, ret, funcPrefix, _, name, parms);
 	}
 
@@ -87,6 +97,7 @@ class InvokeT
 		InstanceParms(ref parms);
 		ReplaceVars(ref parms);
 		ReplaceVars(ref ret);
+		_funcs.Add(name);
 		return string.Format("{0} {1} {2}{3}{4}(IntPtr ptr{5});", def, ret, funcPrefix, _, name, parms);
 	}
 
@@ -120,6 +131,7 @@ class InvokeT
 	{
 		ReplaceVars(ref parms);
 		ReplaceVars(ref ret);
+		_funcs.Remove(name);
 		return "EXPORT("+ret+") "+funcPrefix+_+name+"("+parms+")";
 	}
 
@@ -128,6 +140,7 @@ class InvokeT
 		InstanceParms(ref parms);
 		ReplaceVars(ref parms);
 		ReplaceVars(ref ret);
+		_funcs.Remove(name);
 		return "EXPORT("+ret+") "+funcPrefix+_+name+"("+cppPrefix+"* ptr"+parms+")";
 	}
 }

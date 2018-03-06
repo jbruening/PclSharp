@@ -13,4 +13,10 @@ namespace PclSharp.Struct
         public float X, Y, Z;
         public uint RGBA;
     }
+
+    [StructLayout(LayoutKind.Sequential, Size = 16)]
+    public struct PointNormal
+    {
+        public float X, Y, Z, W;
+    }
 }

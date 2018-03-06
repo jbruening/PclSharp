@@ -67,6 +67,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\IntegralImageNormalEstimation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
+      <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
+    </Compile>
     <Compile Include="Native.cs" />
     <Compile Include="PointCloud.cs">
       <AutoGen>True</AutoGen>
@@ -84,12 +92,6 @@
       <DependentUpon>SampleConsensusPlane.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="SampleConsensus\SampleConsensusPlaneOfXYZ.generated.cs">
-      <DependentUpon>SampleConsensusPlane.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SampleConsensus\SampleConsensusPlaneOfXYZRGBA.generated.cs">
-      <DependentUpon>SampleConsensusPlane.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfByte.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
@@ -109,6 +111,7 @@
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
     <Compile Include="Struct\PointTypes.cs" />
+    <Compile Include="UnmanagedObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InvokeTemplate.ttinclude" />
@@ -116,6 +119,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Features\IntegralImageNormalEstimation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IntegralImageNormalEstimation.cs</LastGenOutput>
+    </Content>
     <Content Include="PointCloud.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PointCloud.cs</LastGenOutput>
@@ -132,9 +139,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="..\PclSharp.Extern\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
