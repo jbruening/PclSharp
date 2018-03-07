@@ -55,6 +55,7 @@ namespace PclSharp.Std
 	public static partial class Invoke
 	{
 		<#= i.Ctor() #>
+		<#= i.Func("IntPtr", "ctor_count", "int count") #>
 		<#= i.Delete() #>
 		<#= i.FuncI("at", " UIntPtr idx, ref csClass value") #>
 		<#= i.FuncI("UIntPtr", "size", "") #>
@@ -80,6 +81,20 @@ namespace PclSharp.Std
 		{
 			_ptr = <#=i.Invoke("ctor")#>;
 		}
+
+		/// <summary>
+        /// construct as a copy of the list
+        /// </summary>
+        /// <param name="list"></param>
+		public VectorOf<#= ClassName #>(List<<#=csClass#>> list)
+        {
+            var arr = list.ToArray();
+            _ptr = <#=i.Invoke("ctor_count", "arr.Length")#>;
+            
+            var dptr = (<#=csClass#>*)Data;
+            for(var i = 0; i < arr.Length; i++)
+                dptr[i] = arr[i];
+        }
 
 		internal VectorOf<#=ClassName#>(IntPtr ptr)
 		{
@@ -156,12 +171,16 @@ extern "C" {
 	return new <#=cppVector#>();
 }
 
+<#= i.Export("vectorType*", "ctor_count", "int count") #>
+{
+	return new <#=cppVector#>(count);
+}
+
 <#=i.Export("void", "delete", "cppVector** ptr")#>
 {
 	delete *ptr;
 	*ptr = NULL;
 }
-
 
 <#=i.ExportI("void", "at", "size_t idx, cppClass* value")#>
 {

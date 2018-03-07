@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PclSharp
 {
-    class UnmanagedObject
+    public abstract class UnmanagedObject : IDisposable
     {
+        protected IntPtr _ptr;
+        public IntPtr Ptr => _ptr;
+
+        public abstract void Dispose();
     }
 }

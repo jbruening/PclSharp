@@ -3,7 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".cs" #>
+<#@ output extension=".txt" #>
 <#@include file="Manager.ttinclude"#>
 <#@include file="InvokeTemplate.ttinclude"#>
 <# 
@@ -54,11 +54,8 @@ namespace PclSharp
 		<#= i.FuncI("bool", "isOrganized", "") #>
 	}
 
-	public class PointCloudOf<#=ClassName#> : IDisposable
+	public class PointCloudOf<#=ClassName#> : PointCloud<<#=csClass#>>
 	{
-		protected IntPtr _ptr;
-		public IntPtr Ptr => _ptr;
-
 		public int Width => (int)<#=i.InvokeI("width")#>;
 		public int Height => (int)<#=i.InvokeI("height")#>;
 		public int Count => (int)<#=i.InvokeI("size")#>;
@@ -83,13 +80,13 @@ namespace PclSharp
 
 		public VectorOf<#=ClassName#> Points => _points;
 
-		public <#=csClass#> At(int col, int row)
+		public override <#=csClass#> At(int col, int row)
 			=> <#=i.InvokeI("at_colrow", "col, row")#>;
 
-		public void Add(<#=csClass#> value)
+		public override void Add(<#=csClass#> value)
 			=> <#=i.InvokeI("add", "value")#>;
 
-		public void Dispose()
+		public override void Dispose()
 		{
 			<#=i.DeleteI()#>;
 		}

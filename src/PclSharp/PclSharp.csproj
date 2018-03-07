@@ -67,20 +67,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\IntegralImageNormalEstimation.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Features\Feature.cs" />
+    <Compile Include="Features\IntegralImageNormalEstimation.cs" />
     <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
     </Compile>
     <Compile Include="Native.cs" />
-    <Compile Include="PointCloud.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PointCloud.tt</DependentUpon>
-    </Compile>
+    <Compile Include="PointCloud.cs" />
     <Compile Include="PointCloudOfXYZ.generated.cs">
       <DependentUpon>PointCloud.tt</DependentUpon>
     </Compile>
@@ -121,11 +114,21 @@
   <ItemGroup>
     <Content Include="Features\IntegralImageNormalEstimation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IntegralImageNormalEstimation.cs</LastGenOutput>
+      <LastGenOutput>IntegralImageNormalEstimation.txt</LastGenOutput>
+    </Content>
+    <Content Include="Features\IntegralImageNormalEstimation.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
     </Content>
     <Content Include="PointCloud.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PointCloud.cs</LastGenOutput>
+      <LastGenOutput>PointCloud.txt</LastGenOutput>
+    </Content>
+    <Content Include="PointCloud.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointCloud.tt</DependentUpon>
     </Content>
     <Content Include="SampleConsensus\SampleConsensusPlane.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

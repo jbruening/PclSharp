@@ -39,11 +39,8 @@ namespace PclSharp
 		
 	}
 
-	public class SampleConsensusPlaneOf<#=ClassName#> : IDisposable
+	public class SampleConsensusPlaneOf<#=ClassName#> : UnmanagedObject
 	{
-		protected IntPtr _ptr;
-		public IntPtr Ptr => _ptr;
-
 		public int Width => (int)<#=i.InvokeI("width")#>;
 		public int Height => (int)<#=i.InvokeI("height")#>;
 		public int Count => (int)<#=i.InvokeI("size")#>;
@@ -84,6 +81,7 @@ namespace PclSharp
 #include "pcl\sample_consensus\sac_model_plane.h"
 
 //typedef <#= cppCloud #> sac_plane;
+typedef boost::shared_ptr<PointCloud<<#=cppClass#>>> boost_cloud;
 
 using namespace pcl;
 using namespace std;
@@ -95,9 +93,9 @@ extern "C" {  // only need to export C interface if
 <#= i.Export("cppCloud*", "ctor", "PointCloud<cppClass>* cloud, vector<int>* indices, bool random") #>
 {
 	if (indices)
-		return new <#=cppCloud#>(boost::shared_ptr<PointCloud<<#=cppClass#>>>(cloud), *indices, random);
+		return new <#=cppCloud#>(boost_cloud(boost_cloud(), cloud), *indices, random);
 	else
-		return new <#=cppCloud#>(boost::shared_ptr<PointCloud<<#=cppClass#>>>(cloud), random);
+		return new <#=cppCloud#>(boost_cloud(boost_cloud(), cloud), random);
 }
 
 <#=i.Export("void", "delete", "cppCloud** ptr")#>

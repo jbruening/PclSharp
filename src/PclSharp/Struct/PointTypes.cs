@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PclSharp.Struct
 {
@@ -18,5 +16,18 @@ namespace PclSharp.Struct
     public struct PointNormal
     {
         public float X, Y, Z, W;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size =16)]
+    public struct Normal
+    {
+        [FieldOffset(0)]
+        public float Curvature;
+        [FieldOffset(0)]
+        public float X;
+        [FieldOffset(4)]
+        public float Y;
+        [FieldOffset(8)]
+        public float Z;
     }
 }

@@ -3,7 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".cs" #>
+<#@ output extension=".txt" #>
 <#@include file="..\Manager.ttinclude"#>
 <#@include file="..\InvokeTemplate.ttinclude"#>
 <# 
@@ -31,6 +31,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using PclSharp.Struct;
 using PclSharp.Std;
+using static PclSharp.Features.IntegralImageNormalEstimation;
 
 namespace PclSharp.Features
 {
@@ -38,11 +39,45 @@ namespace PclSharp.Features
 	{
 		<#= i.Ctor() #>
 		<#= i.Delete() #>
+		<#= i.FuncI("setRectSize", "int width, int height")#>
+		<#= i.FuncI("setBorderPolicy", "BorderPolicy policy")#>
+		<#= i.FuncI("setNormalEstimationMethod", "NormalEstimationMethod method")#>
+		<#= i.FuncI("setMaxDepthChangeFactor", "float factor")#>
+		<#= i.FuncI("setNormalSmoothingSize", "float size")#>
+		<#= i.FuncI("setInputCloud", "IntPtr cloud")#>
+		<#= i.FuncI("compute", "IntPtr cloud")#>
 	}
 
-	public class IntegralImageNormalEstimation<#=ClassName#>
+	public class IntegralImageNormalEstimation<#=ClassName#> : IntegralImageNormalEstimation<<#=csin#>,<#=csout#>>
 	{
-		_ptr = <#=i.Invoke("ctor")#>;
+		public IntegralImageNormalEstimation<#=ClassName#>()
+		{
+			_ptr = <#=i.Invoke("ctor")#>;
+		}
+
+		public override void SetRectSize(int width, int height) 
+			=> <#=i.InvokeI("setRectSize", "width, height")#>;
+
+		public override void SetBorderPolicy(BorderPolicy policy) 
+			=> <#=i.InvokeI("setBorderPolicy", "policy")#>;
+
+		public override void SetNormalEstimationMethod(NormalEstimationMethod method) 
+			=> <#=i.InvokeI("setNormalEstimationMethod", "method")#>;
+
+		public override void SetMaxDepthChangeFactor(float factor) 
+			=> <#=i.InvokeI("setMaxDepthChangeFactor", "factor")#>;
+
+		public override void SetNormalSmoothingSize(float size) 
+			=> <#=i.InvokeI("setNormalSmoothingSize", "size")#>;
+
+		public override void SetInputCloud(PointCloud<<#=csin#>> cloud) 
+			=> <#=i.InvokeI("setInputCloud", "cloud.Ptr")#>;
+
+		public override void Compute(PointCloud<<#=csout#>> cloud) 
+			=> <#=i.InvokeI("compute", "cloud.Ptr")#>;
+
+		public override void Dispose()
+			=> <#=i.DeleteI()#>;
 	}
 }
 
@@ -62,6 +97,7 @@ using namespace pcl;
 using namespace std;
 
 typedef <#=cppWrapper#> integral_image;
+typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
 
 #ifdef __cplusplus  
 extern "C" {  // only need to export C interface if  
@@ -77,6 +113,35 @@ extern "C" {  // only need to export C interface if
 {
 	delete *ptr;
 	*ptr = NULL;
+}
+
+<#=i.ExportI("void", "setRectSize", "int width, int height")#>
+{
+	ptr->setRectSize(width, height);
+}
+<#=i.ExportI("void", "setBorderPolicy", "integral_image::BorderPolicy policy")#>
+{
+	ptr->setBorderPolicy(policy);
+}
+<#=i.ExportI("void", "setNormalEstimationMethod", "integral_image::NormalEstimationMethod method")#>
+{
+	ptr->setNormalEstimationMethod(method);
+}
+<#= i.ExportI("void", "setMaxDepthChangeFactor", "float factor")#>
+{
+	ptr->setMaxDepthChangeFactor(factor);
+}
+<#= i.ExportI("void", "setNormalSmoothingSize", "float size")#>
+{
+	ptr->setNormalSmoothingSize(size);
+}
+<#= i.ExportI("void", "setInputCloud", "PointCloud<cppin>* cloud")#>
+{
+	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
+}
+<#= i.ExportI("void", "compute", "PointCloud<cppout>* cloud")#>
+{
+	ptr->compute(*cloud);
 }
 
 #ifdef __cplusplus  
