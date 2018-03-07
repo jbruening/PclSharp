@@ -76,6 +76,6 @@
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy $(SolutionDir)..\bin\x64\$(ConfigurationName)\PclSharp.Extern.dll $(TargetDir)</PreBuildEvent>
+    <PreBuildEvent>xcopy /y $(SolutionDir)..\bin\x64\$(ConfigurationName)\PclSharp.Extern.dll $(TargetDir)</PreBuildEvent>
   </PropertyGroup>
 </Project>
