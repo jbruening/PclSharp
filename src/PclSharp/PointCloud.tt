@@ -8,7 +8,7 @@
 <#@include file="InvokeTemplate.ttinclude"#>
 <# 
 	var manager = Manager.Create(Host, GenerationEnvironment);
-	outputClass(manager, "XYZ", "Vector3", "PointXYZ");
+	outputClass(manager, "XYZ", "PointXYZ", "PointXYZ");
 	outputClass(manager, "XYZRGBA", "PointXYZRGBA", "PointXYZRGBA");
 	manager.Process(true);
 #>
@@ -32,6 +32,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using PclSharp.Struct;
 using PclSharp.Std;
+using System.Runtime.CompilerServices;
 
 namespace PclSharp
 {
@@ -40,48 +41,67 @@ namespace PclSharp
 		//ctor/dctor
 		<#= i.Ctor() #>
 		<#= i.Func("IntPtr", "ctor_indices", "IntPtr cloud, IntPtr indices") #>
+		<#= i.Func("IntPtr", "ctor_wh", "uint width, uint height") #>
 		<#= i.Delete() #>
 		//methods
-		<#= i.FuncI("csClass", "at_colrow", "int col, int row") #>
+		<#= i.FuncI("unsafe csClass*", "at_colrow", "int col, int row") #>
 		<#= i.FuncI("clear") #>
 		<#= i.FuncI("add", "csClass value") #>
 		//properties
 		<#= i.FuncI("UIntPtr", "size", "") #>
 		<#= i.FuncI("IntPtr", "data", "") #>
 		<#= i.FuncI("uint", "width", "") #>
+		<#= i.FuncI("void", "width_set", "uint width") #>
 		<#= i.FuncI("uint", "height", "") #>
+		<#= i.FuncI("void", "height_set", "uint height") #>
 		<#= i.FuncI("IntPtr", "points", "") #>
+		[return: MarshalAs(UnmanagedType.Bool)]
 		<#= i.FuncI("bool", "isOrganized", "") #>
 	}
 
-	public class PointCloudOf<#=ClassName#> : PointCloud<<#=csClass#>>
+	public unsafe class PointCloudOf<#=ClassName#> : PointCloud<<#=csClass#>>
 	{
-		public int Width => (int)<#=i.InvokeI("width")#>;
-		public int Height => (int)<#=i.InvokeI("height")#>;
+		public int Width 
+		{
+			get { return (int)<#=i.InvokeI("width")#>; }
+			set { <#=i.InvokeI("width_set", "(uint)value")#>; }
+		}
+		public int Height 
+		{
+			get { return (int)<#=i.InvokeI("height")#>; }
+			set { <#=i.InvokeI("height_set", "(uint)value")#>; }
+		}
 		public int Count => (int)<#=i.InvokeI("size")#>;
 		public int Size => Count;
 		public bool IsOrganized => <#=i.InvokeI("isOrganized")#>;
+		public <#=csClass#>* Data => (<#=csClass#>*)<#=i.InvokeI("data")#>;
 
 		private VectorOf<#=ClassName#> _points;
+		public VectorOf<#=ClassName#> Points => _points;
 
-		public PointCloudOf<#=ClassName#>()
+		private PointCloudOf<#=ClassName#>(IntPtr ptr)
 		{
-			_ptr = <#=i.Invoke("ctor")#>;
-
+			_ptr = ptr;
 			_points = new VectorOf<#=ClassName#>(<#=i.InvokeI("points")#>);
+		}
+
+		public PointCloudOf<#=ClassName#>() 
+			: this(<#=i.Invoke("ctor")#>)
+		{
+		}
+
+		public PointCloudOf<#=ClassName#>(int width, int height)
+			: this(<#=i.Invoke("ctor_wh", "(uint)width, (uint)height")#>)
+		{
 		}
 
 		public PointCloudOf<#=ClassName#>(PointCloudOf<#=ClassName#> cloud, Std.VectorOfInt indices)
+			:this (<#=i.Invoke("ctor_indices", "cloud.Ptr, indices.Ptr")#>)
 		{
-			_ptr = <#=i.Invoke("ctor_indices", "cloud.Ptr, indices.Ptr")#>;
-
-			_points = new VectorOf<#=ClassName#>(<#=i.InvokeI("points")#>);
 		}
 
-		public VectorOf<#=ClassName#> Points => _points;
-
-		public override <#=csClass#> At(int col, int row)
-			=> <#=i.InvokeI("at_colrow", "col, row")#>;
+		public override ref <#=csClass#> At(int col, int row)
+			=>  ref Unsafe.AsRef<<#=csClass#>>(<#=i.InvokeI("at_colrow", "col, row")#>);
 
 		public override void Add(<#=csClass#> value)
 			=> <#=i.InvokeI("add", "value")#>;
@@ -118,6 +138,11 @@ extern "C" {  // only need to export C interface if
 	return new <#=cppCloud#>();
 }
 
+<#= i.Export("cppCloud*", "ctor_wh", "uint32_t width, uint32_t height") #>
+{
+	return new <#=cppCloud#>(width, height);
+}
+
 <#=i.Export("cppCloud*", "ctor_indices", "cppCloud* cloud, vector<int>* indices")#>
 {
 	return new <#=cppCloud#>(*cloud, *indices);
@@ -129,9 +154,9 @@ extern "C" {  // only need to export C interface if
 	*ptr = NULL;
 }
 
-<#=i.ExportI("cppClass", "at_colrow", "int col, int row")#>
+<#=i.ExportI("cppClass*", "at_colrow", "int col, int row")#>
 {
-	return ptr->at(col, row);
+	return &ptr->at(col, row);
 }
 
 <#=i.ExportI("void", "add", "cppClass value")#>
@@ -154,12 +179,22 @@ extern "C" {  // only need to export C interface if
 	return ptr->width;
 }
 
+<#=i.ExportI("void", "width_set", "uint32_t width")#>
+{
+	ptr->width = width;
+}
+
 <#=i.ExportI("uint32_t", "height", "")#>
 {
 	return ptr->height;
 }
 
-<#=i.ExportI("bool", "isOrganized", "")#>
+<#=i.ExportI("void", "height_set", "uint32_t height")#>
+{
+	ptr->height = height;
+}
+
+<#=i.ExportI("int32_t", "isOrganized", "")#>
 {
 	return ptr->isOrganized();
 }
@@ -169,8 +204,13 @@ extern "C" {  // only need to export C interface if
 	return &ptr->points;
 }
 
+<#=i.ExportI("cppClass*", "data", "")#>
+{
+	return ptr->points.data();
+}
+
 #ifdef __cplusplus  
 }
 #endif  
-<#+ manager.EndBlock(false); #>
+<#+ i.Dispose(); manager.EndBlock(false); #>
 <#+ } #>

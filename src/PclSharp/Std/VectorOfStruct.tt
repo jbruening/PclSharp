@@ -22,7 +22,7 @@
 		Includes = new[]{"pcl\\point_types.h"},
 		CppNamespaces = new[]{"pcl"}
 	};
-	outputClass(manager, "XYZ", "Vector3", "PointXYZ", pointParms);
+	outputClass(manager, "XYZ", "PointXYZ", "PointXYZ", pointParms);
 	outputClass(manager, "XYZRGBA", "PointXYZRGBA", "PointXYZRGBA", pointParms);
 
 
@@ -48,6 +48,7 @@ void outputClass(Manager manager, string ClassName, string csClass, string cppCl
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 <#= string.Join("", parms.Namespaces.Select(s => "using " + s + ";\r\n")) #>
 
 namespace PclSharp.Std
@@ -119,7 +120,23 @@ namespace PclSharp.Std
 		{ throw new NotImplementedException(); }
 
 		public void CopyTo(<#=csClass#>[] arr, int idx)
-		{ throw new NotImplementedException(); }
+		{
+            fixed (<#=csClass#>* aptr = arr)
+            {
+                Unsafe.CopyBlockUnaligned(aptr, DataU, (uint)(sizeof(<#=csClass#>) * Count));
+            }
+		}
+
+		public <#=csClass#>[] ToArray()
+		{
+			var arr = new <#=csClass#>[Count];
+            fixed (<#=csClass#>* aptr = arr)
+            {
+                Unsafe.CopyBlockUnaligned(aptr, DataU, (uint)(sizeof(<#=csClass#>) * arr.Length));
+            }
+
+			return arr;
+		}
 
 		public void Clear() => <#=i.InvokeI("clear")#>;
 
@@ -136,7 +153,7 @@ namespace PclSharp.Std
 		{ throw new NotImplementedException(); }
 
 		public IEnumerator<<#=csClass#>> GetEnumerator()
-		{ throw new NotImplementedException(); }
+			=> ((IEnumerable<<#=csClass#>>)ToArray()).GetEnumerator();
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 			=> GetEnumerator();

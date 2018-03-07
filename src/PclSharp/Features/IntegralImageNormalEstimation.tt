@@ -8,7 +8,7 @@
 <#@include file="..\InvokeTemplate.ttinclude"#>
 <# 
 	var manager = Manager.Create(Host, GenerationEnvironment);
-	outputClass(manager, "XYZ", "Vector3", "PointXYZ", "Normal", "Normal");
+	outputClass(manager, "XYZ", "PointXYZ", "PointXYZ", "Normal", "Normal");
 	manager.Process(true);
 #>
 <#+ void outputClass(Manager manager, string ClassName, string csin, string cppin, string csout, string cppout)

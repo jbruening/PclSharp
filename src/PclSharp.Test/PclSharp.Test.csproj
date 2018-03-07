@@ -50,8 +50,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PointCloudTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Std\VectorOfIntTests.cs" />
   </ItemGroup>
@@ -76,6 +81,10 @@
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy /y $(SolutionDir)..\bin\x64\$(ConfigurationName)\PclSharp.Extern.dll $(TargetDir)</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y $(SolutionDir)..\bin\x64\$(ConfigurationName)\PclSharp.Extern.* $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
