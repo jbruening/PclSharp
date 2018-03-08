@@ -57,9 +57,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\IntegralImageTests.cs" />
     <Compile Include="PointCloudTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Std\VectorOfIntTests.cs" />
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

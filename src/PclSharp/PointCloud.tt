@@ -10,6 +10,7 @@
 	var manager = Manager.Create(Host, GenerationEnvironment);
 	outputClass(manager, "XYZ", "PointXYZ", "PointXYZ");
 	outputClass(manager, "XYZRGBA", "PointXYZRGBA", "PointXYZRGBA");
+	outputClass(manager, "Normal", "Normal", "Normal");
 	manager.Process(true);
 #>
 <#+ void outputClass(Manager manager, string ClassName, string csClass, string cppClass) 

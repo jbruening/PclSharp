@@ -89,6 +89,9 @@
     </Compile>
     <Compile Include="Native.cs" />
     <Compile Include="PointCloud.cs" />
+    <Compile Include="PointCloudOfNormal.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="PointCloudOfXYZ.generated.cs">
       <DependentUpon>PointCloud.tt</DependentUpon>
     </Compile>
@@ -105,6 +108,9 @@
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfInt.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfNormal.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfStruct.cs">

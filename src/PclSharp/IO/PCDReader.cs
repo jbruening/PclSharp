@@ -27,7 +27,8 @@ namespace PclSharp.IO
 
 		public int Read(string fileName, PointCloud<PointXYZ> cloud, int offset=0)
 		{
-			return Invoke.io_pcdreader_read_xyz(_ptr, fileName, cloud.Ptr, offset);
+			var res = Invoke.io_pcdreader_read_xyz(_ptr, fileName, cloud.Ptr, offset);
+			return res;
 		}
 
 		public override void Dispose()

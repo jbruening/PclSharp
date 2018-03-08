@@ -40,7 +40,8 @@ namespace PclSharp.IO
 
 		public int Read(string fileName, PointCloud<PointXYZ> cloud, int offset=0)
 		{
-			return <#=i.InvokeI("read_xyz", "fileName, cloud.Ptr, offset")#>;
+			var res = <#=i.InvokeI("read_xyz", "fileName, cloud.Ptr, offset")#>;
+			return res;
 		}
 
 		public override void Dispose()
