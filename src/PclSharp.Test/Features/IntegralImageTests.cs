@@ -64,6 +64,7 @@ namespace PclSharp.Test.Features
         [TestMethod]
         public void TestIntegralFile()
         {
+            //copying integral image tutorial from http://pointclouds.org/documentation/tutorials/normal_estimation_using_integral_images.php#normal-estimation-using-integral-images
             using (var cloud = new PointCloudOfXYZ())
             using (var normals = new PointCloudOfNormal())
             using(var ne = new IntegralImageNormalEstimationPointXYZAndNormal())
@@ -78,7 +79,7 @@ namespace PclSharp.Test.Features
                 ne.SetInputCloud(cloud);
                 ne.Compute(normals);
 
-                Assert.IsTrue(normals.Count > 0, "normals count was zero");
+                Assert.IsTrue(normals.Count == cloud.Count, "normals count did not match cloud count");
             }
         }
     }

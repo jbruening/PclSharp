@@ -96,13 +96,6 @@
     <ClCompile Include="std\VectorOfInt.generated.h" />
     <ClCompile Include="std\VectorOfXYZ.generated.h" />
     <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
-    <ClCompile Include="std\folder.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="std\VectorOfByte.generated.h" />
-    <ClCompile Include="std\VectorOfInt.generated.h" />
-    <ClCompile Include="std\VectorOfXYZ.generated.h" />
-    <ClCompile Include="std\VectorOfXYZRGBA.generated.h" />
     <ClCompile Include="sampleconsensus\*.h">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -225,6 +218,33 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="pointcloud\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pointcloud\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pointcloud\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filters\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\*.h">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
