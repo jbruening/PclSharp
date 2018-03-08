@@ -62,6 +62,9 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,6 +77,15 @@
     <Compile Include="Features\IntegralImageNormalEstimation.cs" />
     <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\VoxelGridOfXYZ.generated.cs">
+      <DependentUpon>VoxelGrid.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IO\PCDReader.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCDReader.tt</DependentUpon>
     </Compile>
     <Compile Include="Native.cs" />
     <Compile Include="PointCloud.cs" />
@@ -124,6 +136,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
     </Content>
+    <Content Include="Filters\VoxelGrid.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VoxelGrid.txt</LastGenOutput>
+    </Content>
+    <Content Include="Filters\VoxelGrid.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VoxelGrid.tt</DependentUpon>
+    </Content>
+    <Content Include="IO\PCDReader.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PCDReader.cs</LastGenOutput>
+    </Content>
     <Content Include="PointCloud.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PointCloud.txt</LastGenOutput>
@@ -145,7 +170,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Segmentation\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

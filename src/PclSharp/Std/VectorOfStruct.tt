@@ -61,6 +61,7 @@ namespace PclSharp.Std
 		<#= i.FuncI("at", " UIntPtr idx, ref csClass value") #>
 		<#= i.FuncI("UIntPtr", "size", "") #>
 		<#= i.FuncI("clear") #>
+		<#= i.FuncI("void", "resize", "int size") #>
 		<#= i.FuncI("add", "csClass value") #>
 		<#= i.FuncI("IntPtr", "data", "") #>
 		<#= i.FuncI("insert", "IntPtr idx, csClass value") #>
@@ -112,6 +113,9 @@ namespace PclSharp.Std
             get { return DataU[idx]; }
 			set { DataU[idx] = value; }
 		}
+
+		public void Resize(int size)
+			=> <#=i.InvokeI("resize", "size")#>;
 
 		public void Add(<#=csClass#> value)
 			=> <#=i.InvokeI("add", "value")#>;
@@ -212,6 +216,11 @@ extern "C" {
 <#=i.ExportI("void", "clear", "")#>
 {
 	ptr->clear();
+}
+
+<#=i.ExportI("void", "resize", "int32_t size")#>
+{
+	ptr->resize(size);
 }
 
 <#=i.ExportI("void", "add", "cppClass value")#>
