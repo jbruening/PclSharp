@@ -75,9 +75,7 @@ namespace PclSharp.Test
             Assert.AreEqual(16, sizeof(PointXYZ));
             Assert.AreEqual(16, Marshal.SizeOf<PointXYZ>());
 
-            cloud.Points.Add(new Vector3(1, 2, 3));
-
-            //cloud.Add(new Vector3(1, 2, 3));
+            cloud.Add(new Vector3(1, 2, 3));
 
             Assert.AreEqual(1, cloud.Count);
         }
@@ -95,14 +93,7 @@ namespace PclSharp.Test
             cloud.Height = 2;
             Assert.IsTrue(cloud.IsOrganized);
 
-            try
-            {
-                Assert.AreEqual(6f, cloud.At(1, 1).X);
-            }
-            catch (AccessViolationException)
-            {
-                Assert.Fail("access violation exception");
-            }
+            Assert.AreEqual(6f, cloud.At(1, 1).X);
         }
 
         [TestMethod]

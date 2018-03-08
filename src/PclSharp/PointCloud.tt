@@ -46,7 +46,7 @@ namespace PclSharp
 		//methods
 		<#= i.FuncI("unsafe csClass*", "at_colrow", "int col, int row") #>
 		<#= i.FuncI("clear") #>
-		<#= i.FuncI("add", "csClass value") #>
+		<#= i.FuncI("unsafe void", "add", "csClass* value") #>
 		//properties
 		<#= i.FuncI("UIntPtr", "size", "") #>
 		<#= i.FuncI("IntPtr", "data", "") #>
@@ -104,7 +104,7 @@ namespace PclSharp
 			=>  ref Unsafe.AsRef<<#=csClass#>>(<#=i.InvokeI("at_colrow", "col, row")#>);
 
 		public override void Add(<#=csClass#> value)
-			=> <#=i.InvokeI("add", "value")#>;
+			=> <#=i.InvokeI("add", "&value")#>;
 
 		public override void Dispose()
 		{
@@ -159,9 +159,12 @@ extern "C" {  // only need to export C interface if
 	return &ptr->at(col, row);
 }
 
-<#=i.ExportI("void", "add", "cppClass value")#>
+<#=i.ExportI("void", "add", "cppClass* value")#>
 {
-	ptr->push_back(value);
+	//the value needs to be aligned to be pushed into the cloud, so do that.
+	<#=cppClass#> deref;
+	memcpy(&deref, value, sizeof(<#=cppClass#>));
+	ptr->push_back(deref);
 }
 
 <#=i.ExportI("size_t", "size", "")#>
