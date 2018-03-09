@@ -73,12 +73,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ModelCoefficients.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCoefficients.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eigen\VectorXf.cs" />
     <Compile Include="Features\Feature.cs" />
     <Compile Include="Features\IntegralImageNormalEstimation.cs" />
     <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
     </Compile>
+    <Compile Include="Filters\ExtractIndicesOfXYZ.generated.cs">
+      <DependentUpon>ExtractIndices.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\ExtractIndices.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtractIndices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\FilterIndices.cs" />
+    <Compile Include="Filters\VoxelGrid.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VoxelGrid.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\VoxelGridOfXYZ.generated.cs">
       <DependentUpon>VoxelGrid.tt</DependentUpon>
     </Compile>
@@ -88,6 +108,7 @@
       <DependentUpon>PCDReader.tt</DependentUpon>
     </Compile>
     <Compile Include="Native.cs" />
+    <Compile Include="PclBase.cs" />
     <Compile Include="PointCloud.cs" />
     <Compile Include="PointCloudOfNormal.generated.cs">
       <DependentUpon>PointCloud.tt</DependentUpon>
@@ -98,13 +119,33 @@
     <Compile Include="PointCloudOfXYZRGBA.generated.cs">
       <DependentUpon>PointCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleConsensus\SampleConsensusPlane.cs">
-      <DependentUpon>SampleConsensusPlane.tt</DependentUpon>
+    <Compile Include="PointIndices.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>PointIndices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleConsensus\SampleConsensusModel.cs" />
+    <Compile Include="SampleConsensus\SampleConsensusModelPlaneOfXYZ.generated.cs">
+      <DependentUpon>SampleConsensusModelPlane.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SampleConsensus\SampleConsensusModelPlane.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleConsensusModelPlane.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SACSegmentation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SACSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SACSegmentationOfXYZ.generated.cs">
+      <DependentUpon>SACSegmentation.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfByte.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfFloat.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfInt.generated.cs">
@@ -133,6 +174,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\ModelCoefficients.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelCoefficients.cs</LastGenOutput>
+    </Content>
     <Content Include="Features\IntegralImageNormalEstimation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IntegralImageNormalEstimation.txt</LastGenOutput>
@@ -142,14 +187,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
     </Content>
+    <Content Include="Filters\ExtractIndices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExtractIndices.cs</LastGenOutput>
+    </Content>
     <Content Include="Filters\VoxelGrid.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VoxelGrid.txt</LastGenOutput>
-    </Content>
-    <Content Include="Filters\VoxelGrid.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VoxelGrid.tt</DependentUpon>
+      <LastGenOutput>VoxelGrid.cs</LastGenOutput>
     </Content>
     <Content Include="IO\PCDReader.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -164,9 +208,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PointCloud.tt</DependentUpon>
     </Content>
-    <Content Include="SampleConsensus\SampleConsensusPlane.tt">
+    <Content Include="PointIndices.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SampleConsensusPlane.cs</LastGenOutput>
+      <LastGenOutput>PointIndices.cs</LastGenOutput>
+    </Content>
+    <Content Include="SampleConsensus\SampleConsensusModelPlane.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SampleConsensusModelPlane.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\SACSegmentation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SACSegmentation.cs</LastGenOutput>
     </Content>
     <Content Include="Std\VectorOfStruct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -176,9 +228,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Segmentation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

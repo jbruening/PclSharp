@@ -8,6 +8,6 @@ namespace PclSharp.Filters
     {
         public abstract void filter(PointCloud<PointT> output);
         public abstract void SetInputCloud(PointCloud<PointT> cloud);
-        public abstract VectorOfInt Indices { get; set; }
+        public abstract void SetIndices(VectorOfInt indices);
     }
 }

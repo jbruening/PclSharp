@@ -31,7 +31,7 @@ namespace PclSharp.IO
 			return res;
 		}
 
-		public override void Dispose()
+		protected override void DisposeObject()
 		{
 			Invoke.io_pcdreader_delete(ref _ptr);
 		}

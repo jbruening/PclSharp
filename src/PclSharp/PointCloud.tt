@@ -107,7 +107,7 @@ namespace PclSharp
 		public override void Add(<#=csClass#> value)
 			=> <#=i.InvokeI("add", "&value")#>;
 
-		public override void Dispose()
+		protected override void DisposeObject()
 		{
 			<#=i.DeleteI()#>;
 		}

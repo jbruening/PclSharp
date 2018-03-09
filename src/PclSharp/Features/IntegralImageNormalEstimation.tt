@@ -76,7 +76,7 @@ namespace PclSharp.Features
 		public override void Compute(PointCloud<<#=csout#>> cloud) 
 			=> <#=i.InvokeI("compute", "cloud.Ptr")#>;
 
-		public override void Dispose()
+		protected override void DisposeObject()
 			=> <#=i.DeleteI()#>;
 	}
 }

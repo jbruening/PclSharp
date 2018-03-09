@@ -101,6 +101,13 @@ class InvokeT : IDisposable
 		return string.Format("{0} {1} {2}{3}{4}(IntPtr ptr{5});", def, ret, funcPrefix, _, name, parms);
 	}
 
+	public string Prop(string name, string type)
+	{
+		return 
+		FuncI("void", "set"+name, type + " value") + "\r\n		" +
+		FuncI(type, "get"+name, "");
+	}
+
 	public string Invoke(string name)
 	{
 		return Invoke(name, "");
@@ -124,6 +131,13 @@ class InvokeT : IDisposable
 		return string.Format("Invoke.{0}{1}{2}(_ptr{3})", funcPrefix, _, name, parms);
 	}
 
+	public string InvokeP(string name, string type)
+	{
+		return
+		"get { return " + InvokeI("get"+name, "") + "; }" + "\r\n            " +
+		"set { " + InvokeI("set"+name, "value") + "; }";
+	}
+
 	public string DeleteI()
 	{ return Invoke("delete", "ref _ptr");}
 
@@ -142,6 +156,15 @@ class InvokeT : IDisposable
 		ReplaceVars(ref ret);
 		_funcs.Remove(name);
 		return "EXPORT("+ret+") "+funcPrefix+_+name+"("+cppPrefix+"* ptr"+parms+")";
+	}
+
+	public string ExportP(string name, string type)
+	{
+		return
+		ExportI("void", "set"+name, type+" value") + "\r\n" +
+		"{ ptr->set"+name+"(value); }\r\n" +
+		ExportI(type, "get"+name, "") + "\r\n" +
+		"{ return ptr->get"+name+"(); }";
 	}
 }
 #>
