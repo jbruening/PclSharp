@@ -21,7 +21,8 @@
 	{
 		Namespaces = new[]{"System.Numerics", "PclSharp.Struct"},
 		Includes = new[]{"pcl\\point_types.h"},
-		CppNamespaces = new[]{"pcl"}
+		CppNamespaces = new[]{"pcl"},
+		align = true,
 	};
 	outputClass(manager, "XYZ", "PointXYZ", "PointXYZ", pointParms);
 	outputClass(manager, "XYZRGBA", "PointXYZRGBA", "PointXYZRGBA", pointParms);
@@ -71,7 +72,7 @@ namespace PclSharp.Std
         public void RemoveAt(int index)
 		{ throw new NotImplementedException(); }
 
-		public IEnumerator<T> GetEnumerator()
+		public virtual IEnumerator<T> GetEnumerator()
 			=> ((IEnumerable<T>)ToArray()).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -191,6 +192,13 @@ namespace PclSharp.Std
 		public override void Insert(int index, <#=csClass#> item)
 			=> <#=i.InvokeI("insert", "(IntPtr)index, item")#>;
 
+		public override IEnumerator<<#=csClass#>> GetEnumerator()
+		{
+			var count = Count;
+			for(var i = 0; i < count; i++)
+				yield return this[i];
+		}
+
 		protected override void DisposeObject()
 		{
 			if (_suppressDispose)
@@ -256,12 +264,24 @@ extern "C" {
 
 <#=i.ExportI("void", "add", "cppClass value")#>
 {
-	ptr->push_back(value);
+	<#+ if (parms.align) { #>
+//the value needs to be aligned to be pushed into the cloud, so do that.
+	<#=cppClass#> deref;
+	memcpy(&deref, &value, sizeof(<#=cppClass#>));
+	ptr->push_back(deref);<#+} else {#>
+	ptr->push_back(value);<#+}#>
+
 }
 
 <#=i.ExportI("void", "insert", "ptrdiff_t index, cppClass value")#>
 {
-	ptr->insert(ptr->begin()+index, value);
+	<#+ if (parms.align) { #>
+//the value needs to be aligned to be pushed into the cloud, so do that.
+	<#=cppClass#> deref;
+	memcpy(&deref, &value, sizeof(<#=cppClass#>));
+	ptr->insert(ptr->begin()+index, deref);<#+} else {#>
+	ptr->insert(ptr->begin()+index, value);<#+}#>
+
 }
 
 <#=i.ExportI("cppClass*", "data", "")#>

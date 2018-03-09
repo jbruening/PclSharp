@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace PclSharp.Struct
 {
+    [DebuggerDisplay("{V}")]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
     public struct PointXYZ
     {
@@ -24,6 +26,7 @@ namespace PclSharp.Struct
             => v.V;
     }
 
+    [DebuggerDisplay("{V}, {RGBA.ToString(\"X\")}")]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
     public struct PointXYZRGBA
     {
@@ -41,6 +44,7 @@ namespace PclSharp.Struct
         public uint RGBA;
     }
 
+    [DebuggerDisplay("{X}, {Y}, {Z}, {Curvature}")]
     [StructLayout(LayoutKind.Explicit, Size =16)]
     public struct Normal
     {
@@ -52,5 +56,8 @@ namespace PclSharp.Struct
         public float Y;
         [FieldOffset(8)]
         public float Z;
+
+        [FieldOffset(12)]
+        public float D4;
     }
 }

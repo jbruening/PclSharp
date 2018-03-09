@@ -39,7 +39,7 @@ namespace PclSharp.Std
         public void RemoveAt(int index)
 		{ throw new NotImplementedException(); }
 
-		public IEnumerator<T> GetEnumerator()
+		public virtual IEnumerator<T> GetEnumerator()
 			=> ((IEnumerable<T>)ToArray()).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -14,6 +14,7 @@ class VectorParms
 	public string[] Namespaces = new string[0];
 	public string[] Includes = new string[0];
 	public string[] CppNamespaces = new string[0];
+	public bool align;
 }
 
 // https://raw.github.com/damieng/DamienGKit

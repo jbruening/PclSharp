@@ -87,9 +87,12 @@ namespace PclSharp.Std
 			throw new NotImplementedException();
 		}
 
+		private IntPtr At(int idx)
+			=> <#=i.InvokeI("at", "(UIntPtr)idx")#>;
+
 		public override <#=csClass#> this[int idx]
         {
-            get { throw new NotImplementedException(); }
+            get { return new <#=csClass#>(At(idx)); }
 			set { throw new NotImplementedException(); }
 		}
 
@@ -108,7 +111,7 @@ namespace PclSharp.Std
 		{
 			var arr = new <#=csClass#>[Count];
 			for(var i = 0; i < arr.Length; i++)
-				arr[i] = new <#=csClass#>(<#=i.InvokeI("at", "(UIntPtr)i")#>);
+				arr[i] = new <#=csClass#>(At(i));
 
 			return arr;
 		}
@@ -117,6 +120,13 @@ namespace PclSharp.Std
 
 		public override void Insert(int index, <#=csClass#> item)
 			=> <#=i.InvokeI("insert", "(IntPtr)index, item")#>;
+
+		public override IEnumerator<<#=csClass#>> GetEnumerator()
+		{
+			var count = Count;
+			for(var i = 0; i < count; i++)
+				yield return new <#=csClass#>(At(i));
+		}
 
 		protected override void DisposeObject()
 		{
