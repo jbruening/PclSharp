@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="std\*.h" />
+    <ClCompile Include="common\*.h" />
     <ClCompile Include="pointcloud\*.h" />
     <ClCompile Include="sampleconsensus\*.h" />
     <ClCompile Include="features\*.h" />

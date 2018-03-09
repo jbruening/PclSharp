@@ -18,14 +18,13 @@ namespace PclSharp.Common
 
 	public class ModelCoefficients : UnmanagedObject
 	{
-		private VectorOfFloat _values;
 		public Vector<float> Values { get; }
 
 		public ModelCoefficients()
 		{
 			_ptr = Invoke.modelcoefficients_ctor();
 
-			_values = new VectorOfFloat(Invoke.modelcoefficients_values(_ptr));
+			Values = new VectorOfFloat(Invoke.modelcoefficients_values(_ptr));
 		}
 
 		protected override void DisposeObject()

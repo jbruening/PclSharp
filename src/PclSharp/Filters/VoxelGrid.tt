@@ -81,7 +81,7 @@ namespace PclSharp.Filters
 
 		public override void SetInputCloud(PointCloud<<#=csin#>> cloud)
 		{
-			throw new NotImplementedException();
+			<#=i.InvokeI("setInputCloud", "cloud")#>;
 		}
 
 		public override void SetIndices(VectorOfInt indices)
