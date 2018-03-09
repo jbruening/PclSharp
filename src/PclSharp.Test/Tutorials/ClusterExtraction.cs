@@ -18,6 +18,7 @@ namespace PclSharp.Test
         public void ClusterExtractionTutorialTest()
         {
             using (var cloud = new PointCloudOfXYZ())
+            using (var clusterIndices = new VectorOfPointIndices())
             {
                 using (var reader = new PCDReader())
                     reader.Read(DataPath("tutorials/table_scene_lms400.pcd"), cloud);
@@ -39,7 +40,7 @@ namespace PclSharp.Test
                         MaxIterations = 100,
                         DistanceThreshold = 0.02f
                     })
-                    using(var cloudPlane = new PointCloudOfXYZ())
+                    using (var cloudPlane = new PointCloudOfXYZ())
                     using (var coefficients = new Common.ModelCoefficients())
                     using (var inliers = new PointIndices())
                     {
@@ -66,6 +67,36 @@ namespace PclSharp.Test
 
                                 cloudFiltered.Dispose();
                                 cloudFiltered = cloudF;
+                            }
+
+                            i++;
+                        }
+
+                        Assert.IsTrue(i > 1, "Didn't find more than 1 plane");
+                        var tree = new Search.KdTreeOfXYZ();
+                        tree.SetInputCloud(cloudFiltered);
+
+                        using (var ec = new EuclideanClusterExtractionOfXYZ
+                        {
+                            ClusterTolerance = 0.02,
+                            MinClusterSize = 100,
+                            MaxClusterSize = 25000
+                        })
+                        {
+                            ec.SetSearchMethod(tree);
+                            ec.SetInputCloud(cloudFiltered);
+                            ec.Extract(clusterIndices);
+                        }
+
+                        foreach(var pis in clusterIndices)
+                        {
+                            using (var cloudCluster = new PointCloudOfXYZ())
+                            {
+                                foreach(var pit in pis.Indices)
+                                    cloudCluster.Add(cloudFiltered.Points[pit]);
+
+                                cloudCluster.Width = cloudCluster.Points.Count;
+                                cloudCluster.Height = 1;
                             }
                         }
                     }

@@ -134,6 +134,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SampleConsensusModelPlane.tt</DependentUpon>
     </Compile>
+    <Compile Include="Search\KdTree.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KdTree.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\KdTreeOfXYZ.generated.cs">
+      <DependentUpon>KdTree.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\Search.cs" />
+    <Compile Include="Segmentation\EuclideanClusterExtraction.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuclideanClusterExtraction.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\EuclideanClusterExtractionOfXYZ.generated.cs">
+      <DependentUpon>EuclideanClusterExtraction.tt</DependentUpon>
+    </Compile>
     <Compile Include="Segmentation\SACSegmentation.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,10 +171,18 @@
     <Compile Include="Std\VectorOfNormal.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
+    <Compile Include="Std\VectorOfPointIndices.generated.cs">
+      <DependentUpon>VectorOfUnmanaged.tt</DependentUpon>
+    </Compile>
     <Compile Include="Std\VectorOfStruct.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfUnmanaged.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VectorOfUnmanaged.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfXYZ.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
@@ -216,6 +241,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SampleConsensusModelPlane.cs</LastGenOutput>
     </Content>
+    <Content Include="Search\KdTree.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KdTree.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\EuclideanClusterExtraction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EuclideanClusterExtraction.cs</LastGenOutput>
+    </Content>
     <Content Include="Segmentation\SACSegmentation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SACSegmentation.cs</LastGenOutput>
@@ -223,6 +256,10 @@
     <Content Include="Std\VectorOfStruct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorOfStruct.cs</LastGenOutput>
+    </Content>
+    <Content Include="Std\VectorOfUnmanaged.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VectorOfUnmanaged.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

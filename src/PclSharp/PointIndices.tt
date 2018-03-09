@@ -32,17 +32,29 @@ namespace PclSharp
 
 	public class PointIndices : UnmanagedObject
 	{
+		private bool _suppressDispose;
+
 		public VectorOfInt Indices { get; }
 
 		public PointIndices()
 		{
 			_ptr = <#=i.Invoke("ctor")#>;
-
 			Indices = new VectorOfInt(<#=i.InvokeI("indices")#>);
+		}
+
+		internal PointIndices(IntPtr ptr)
+		{
+			_ptr = ptr;
+			Indices = new VectorOfInt(<#=i.InvokeI("indices")#>);
+
+			_suppressDispose = true;
 		}
 
 		protected override void DisposeObject()
 		{
+			if (_suppressDispose)
+				return;
+
 			<#=i.DeleteI()#>;
 		}
 	}

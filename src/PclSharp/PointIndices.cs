@@ -19,17 +19,29 @@ namespace PclSharp
 
 	public class PointIndices : UnmanagedObject
 	{
+		private bool _suppressDispose;
+
 		public VectorOfInt Indices { get; }
 
 		public PointIndices()
 		{
 			_ptr = Invoke.pointindices_ctor();
-
 			Indices = new VectorOfInt(Invoke.pointindices_indices(_ptr));
+		}
+
+		internal PointIndices(IntPtr ptr)
+		{
+			_ptr = ptr;
+			Indices = new VectorOfInt(Invoke.pointindices_indices(_ptr));
+
+			_suppressDispose = true;
 		}
 
 		protected override void DisposeObject()
 		{
+			if (_suppressDispose)
+				return;
+
 			Invoke.pointindices_delete(ref _ptr);
 		}
 	}

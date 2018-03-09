@@ -126,14 +126,15 @@
     <ClInclude Include="export.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="std\*.h" />
     <ClCompile Include="common\*.h" />
-    <ClCompile Include="pointcloud\*.h" />
-    <ClCompile Include="sampleconsensus\*.h" />
     <ClCompile Include="features\*.h" />
     <ClCompile Include="filters\*.h" />
     <ClCompile Include="io\*.h" />
+    <ClCompile Include="pointcloud\*.h" />    
+    <ClCompile Include="sampleconsensus\*.h" />
+    <ClCompile Include="search\*.h" />
     <ClCompile Include="segmentation\*.h" />
+    <ClCompile Include="std\*.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
