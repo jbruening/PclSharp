@@ -167,6 +167,22 @@
     <Compile Include="Segmentation\SACSegmentationOfXYZ.generated.cs">
       <DependentUpon>SACSegmentation.tt</DependentUpon>
     </Compile>
+    <Compile Include="Segmentation\SupervoxelClustering.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupervoxelClustering.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClusteringOfXYZRGBA.generated.cs">
+      <DependentUpon>SupervoxelClustering.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClusters.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupervoxelClusters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelClustersOfXYZRGBA.generated.cs">
+      <DependentUpon>SupervoxelClusters.tt</DependentUpon>
+    </Compile>
     <Compile Include="Std\VectorOfByte.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
@@ -265,6 +281,14 @@
     <Content Include="Segmentation\SACSegmentation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SACSegmentation.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\SupervoxelClustering.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SupervoxelClustering.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\SupervoxelClusters.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SupervoxelClusters.cs</LastGenOutput>
     </Content>
     <Content Include="Std\VectorOfStruct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

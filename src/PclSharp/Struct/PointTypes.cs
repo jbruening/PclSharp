@@ -28,7 +28,7 @@ namespace PclSharp.Struct
             => v.V;
     }
 
-    [DebuggerDisplay("{V}, {RGBA.ToString(\"X\")}")]
+    [DebuggerDisplay("{V}, {RGBA.ToString(\"X8\")}")]
     [StructLayout(LayoutKind.Explicit, Size = 32)]
     public unsafe struct PointXYZRGBA
     {

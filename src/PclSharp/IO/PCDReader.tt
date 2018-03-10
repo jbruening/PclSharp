@@ -29,6 +29,7 @@ namespace PclSharp.IO
 		<#= i.Delete() #>
 
 		<#= i.FuncI("int", "read_xyz", "string fileName, IntPtr cloud, int offset") #>
+		<#= i.FuncI("int", "read_xyzrgba", "string fileName, IntPtr cloud, int offset") #>
 	}
 
 	public class PCDReader : UnmanagedObject
@@ -42,6 +43,11 @@ namespace PclSharp.IO
 		{
 			var res = <#=i.InvokeI("read_xyz", "fileName, cloud.Ptr, offset")#>;
 			return res;
+		}
+
+		public int Read(string fileName, PointCloud<PointXYZRGBA> cloud, int offset=0)
+		{
+			return <#=i.InvokeI("read_xyzrgba", "fileName, cloud, offset")#>;
 		}
 
 		protected override void DisposeObject()
@@ -81,6 +87,9 @@ extern "C" {
 {
 	return ptr->read(string(str), *cloud, offset);
 }
+<#=i.ExportI("int32_t", "read_xyzrgba", "const char* str, PointCloud<PointXYZRGBA>* cloud, int offset")#>
+{ return ptr->read(string(str), *cloud, offset); }
+
 
 #ifdef __cplusplus  
 }

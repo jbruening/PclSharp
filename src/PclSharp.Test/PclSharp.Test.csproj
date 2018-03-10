@@ -65,6 +65,8 @@
     <Compile Include="Tutorials\PlanarSegmentation.cs" />
     <Compile Include="Tutorials\ClusterExtraction.cs" />
     <Compile Include="PointSizeTest.cs" />
+    <Compile Include="Tutorials\SupervoxelClustering.cs" />
+    <Compile Include="Tutorials\StatisticalOutlierRemoval.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

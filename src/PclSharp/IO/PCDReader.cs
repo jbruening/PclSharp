@@ -16,6 +16,8 @@ namespace PclSharp.IO
 
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern int io_pcdreader_read_xyz(IntPtr ptr, string fileName, IntPtr cloud, int offset);
+		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
+		public static extern int io_pcdreader_read_xyzrgba(IntPtr ptr, string fileName, IntPtr cloud, int offset);
 	}
 
 	public class PCDReader : UnmanagedObject
@@ -29,6 +31,11 @@ namespace PclSharp.IO
 		{
 			var res = Invoke.io_pcdreader_read_xyz(_ptr, fileName, cloud.Ptr, offset);
 			return res;
+		}
+
+		public int Read(string fileName, PointCloud<PointXYZRGBA> cloud, int offset=0)
+		{
+			return Invoke.io_pcdreader_read_xyzrgba(_ptr, fileName, cloud, offset);
 		}
 
 		protected override void DisposeObject()
