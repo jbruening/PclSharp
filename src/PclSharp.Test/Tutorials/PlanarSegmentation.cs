@@ -21,8 +21,6 @@ namespace PclSharp.Test
         [TestMethod]
         public unsafe void PlanarSegmentationTutorialTest()
         {
-
-
             using (var cloud = new PointCloudOfXYZ())
             {
                 cloud.Width = 15;
@@ -31,15 +29,15 @@ namespace PclSharp.Test
 
                 for(var i = 0; i < cloud.Points.Count; i++)
                 {
-                    (cloud.Points.DataU + i)->X = 1024 * rand();
-                    (cloud.Points.DataU + i)->Y = 1024 * rand();
-                    (cloud.Points.DataU + i)->Z = 1;
+                    (cloud.Data + i)->X = 1024 * rand();
+                    (cloud.Data + i)->Y = 1024 * rand();
+                    (cloud.Data + i)->Z = 1;
                 }
 
                 //set a few outliers
-                (cloud.Points.DataU + 0)->Z = 2f;
-                (cloud.Points.DataU + 3)->Z = -2f;
-                (cloud.Points.DataU + 6)->Z = 4f;
+                (cloud.Data + 0)->Z = 2f;
+                (cloud.Data + 3)->Z = -2f;
+                (cloud.Data + 6)->Z = 4f;
 
                 using (var seg = new SACSegmentationOfXYZ())
                 using (var inliers = new PointIndices())

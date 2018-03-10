@@ -103,10 +103,9 @@ namespace PclSharp.Test
                 cloud.Add(new Vector3(i, i, i));
 
             var ptr = cloud.Data;
-            var vptr = cloud.Points.DataU;
 
             for (var i = 0; i < 10; i++)
-                Assert.AreEqual(i, vptr[i].X);
+                Assert.AreEqual(i, ptr[i].X);
         }
 
         [TestMethod]

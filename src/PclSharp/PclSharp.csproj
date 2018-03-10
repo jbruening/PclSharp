@@ -94,6 +94,14 @@
       <DependentUpon>ExtractIndices.tt</DependentUpon>
     </Compile>
     <Compile Include="Filters\FilterIndices.cs" />
+    <Compile Include="Filters\StatisticalOutlierRemoval.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatisticalOutlierRemoval.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\StatisticalOutlierRemovalOfXYZ.generated.cs">
+      <DependentUpon>StatisticalOutlierRemoval.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\VoxelGrid.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,6 +200,7 @@
     </Compile>
     <Compile Include="Struct\PointTypes.cs" />
     <Compile Include="UnmanagedObject.cs" />
+    <Compile Include="Utils\PointSizes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InvokeTemplate.ttinclude" />
@@ -215,6 +224,10 @@
     <Content Include="Filters\ExtractIndices.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ExtractIndices.cs</LastGenOutput>
+    </Content>
+    <Content Include="Filters\StatisticalOutlierRemoval.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StatisticalOutlierRemoval.cs</LastGenOutput>
     </Content>
     <Content Include="Filters\VoxelGrid.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
