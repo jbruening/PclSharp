@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6A3A2E07-D32B-4B2D-86AD-BE625BFC3282}</ProjectGuid>
+    <ProjectGuid>{7B9C71D4-2DF0-49BB-A2A8-22902470FF39}</ProjectGuid>
     <RootNamespace>Pclinvoke</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>PclSharp.Extern</ProjectName>
+    <ProjectName>PclSharp.ExternVis</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(PCL_ROOT)3rdParty\VTK\include\vtk-8.0;$(PCL_ROOT)include\pcl-1.8;$(PCL_ROOT)3rdParty\Eigen\eigen3;$(PCL_ROOT)3rdParty\Boost\include\boost-1_64;C:\Program Files\OpenNI2\Include;$(PCL_ROOT)3rdParty\FLANN\include;$(PCL_ROOT)3rdParty\Qhull\include;$(PCL_ROOT)3rdParty\VTK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;__SSSE3__;__SSE2__;__SSE__;vtkIOExport_AUTOINIT=1(vtkIOExportOpenGL);vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL);vtkRenderingCore_INCLUDE=\"$(ProjectDir)../PclSharp.Extern/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL.h\";vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL);BOOST_ALL_NO_LIB;DISABLE_OPENNI;DISABLE_ENSENSO;DISABLE_DAVIDSDK;DISABLE_DSSDK;DISABLE_RSSDK;DISABLE_PCAP;DISABLE_PNG;FLANN_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;__SSSE3__;__SSE2__;__SSE__;vtkIOExport_AUTOINIT=1(vtkIOExportOpenGL);vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL);vtkRenderingCore_INCLUDE="$(ProjectDir.Replace('\', '/'))../PclSharp.Extern/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL.h";vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL);BOOST_ALL_NO_LIB;DISABLE_OPENNI;DISABLE_ENSENSO;DISABLE_DAVIDSDK;DISABLE_DSSDK;DISABLE_RSSDK;DISABLE_PCAP;DISABLE_PNG;FLANN_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(PCL_ROOT)3rdParty\VTK\include\vtk-8.0;$(PCL_ROOT)include\pcl-1.8;$(PCL_ROOT)3rdParty\Eigen\eigen3;$(PCL_ROOT)3rdParty\Boost\include\boost-1_64;C:\Program Files\OpenNI2\Include;$(PCL_ROOT)3rdParty\FLANN\include;$(PCL_ROOT)3rdParty\Qhull\include;$(PCL_ROOT)3rdParty\VTK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -108,7 +108,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;__SSSE3__;__SSE2__;__SSE__;vtkIOExport_AUTOINIT=1(vtkIOExportOpenGL);vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL);vtkRenderingCore_INCLUDE="$(ProjectDir)../PclSharp.Extern/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL.h";vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL);BOOST_ALL_NO_LIB;DISABLE_OPENNI;DISABLE_ENSENSO;DISABLE_DAVIDSDK;DISABLE_DSSDK;DISABLE_RSSDK;DISABLE_PCAP;DISABLE_PNG;FLANN_STATIC;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;__SSSE3__;__SSE2__;__SSE__;vtkIOExport_AUTOINIT=1(vtkIOExportOpenGL);vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL);vtkRenderingCore_INCLUDE="$(ProjectDir.Replace('\', '/'))../PclSharp.Extern/vtkRenderingCore_AUTOINIT_vtkInteractionStyle_vtkRenderingFreeType_vtkRenderingOpenGL.h";vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL);BOOST_ALL_NO_LIB;DISABLE_OPENNI;DISABLE_ENSENSO;DISABLE_DAVIDSDK;DISABLE_DSSDK;DISABLE_RSSDK;DISABLE_PCAP;DISABLE_PNG;FLANN_STATIC;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(PCL_ROOT)3rdParty\VTK\include\vtk-8.0;$(PCL_ROOT)include\pcl-1.8;$(PCL_ROOT)3rdParty\Eigen\eigen3;$(PCL_ROOT)3rdParty\Boost\include\boost-1_64;C:\Program Files\OpenNI2\Include;$(PCL_ROOT)3rdParty\FLANN\include;$(PCL_ROOT)3rdParty\Qhull\include;$(PCL_ROOT)3rdParty\VTK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -123,19 +123,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="export.h" />
+    <ClInclude Include="..\PclSharp.Extern\export.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PointSizes.h" />
-    <ClCompile Include="common\*.h" />
-    <ClCompile Include="features\*.h" />
-    <ClCompile Include="filters\*.h" />
-    <ClCompile Include="io\*.h" />
-    <ClCompile Include="pointcloud\*.h" />
-    <ClCompile Include="sampleconsensus\*.h" />
-    <ClCompile Include="search\*.h" />
-    <ClCompile Include="segmentation\*.h" />
-    <ClCompile Include="std\*.h" />
+    <ClCompile Include="visualizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

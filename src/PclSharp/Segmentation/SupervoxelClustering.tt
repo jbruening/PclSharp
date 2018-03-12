@@ -15,13 +15,23 @@
 using PclSharp.Common;
 using PclSharp.Search;
 using PclSharp.Std;
+using PclSharp.Struct;
 
 namespace PclSharp.Segmentation
 {
 	public abstract class SupervoxelClustering<PointT> : UnmanagedObject
 	{
 		public abstract void SetInputCloud(PointCloud<PointT> cloud);
+		public abstract void SetNormalCloud(PointCloud<Normal> cloud);
 		public abstract void Extract(SupervoxelClusters<PointT> clusters);
+		
+		public abstract void SetColorImportance(float value);
+		public abstract void SetNormalImportance(float value);
+		public abstract void SetSpatialImportance(float value);
+
+		public abstract void RefineSupervoxels(int iterations, SupervoxelClusters<PointT> clusters);
+
+		public abstract PointCloud<PointXYZL> GetLabeledCloud();
 	}
 }
 <#+ void outputClass(Manager manager, string ClassName, string csin, string cppin)
@@ -49,10 +59,20 @@ namespace PclSharp.Segmentation
 
 		//methods
 		<#=i.FuncI("setInputCloud", "IntPtr cloud")#>
+		<#=i.FuncI("setNormalCloud", "IntPtr cloud")#>
 		<#=i.FuncI("extract", "IntPtr clusters")#>
+		<#=i.FuncI("setColorImportance", "float value")#>
+		<#=i.FuncI("setNormalImportance", "float value")#>
+		<#=i.FuncI("setSpatialImportance", "float value")#>
+
+		<#=i.FuncI("void", "refineSupervoxels", "int iterations, IntPtr supervoxels")#>
+
+		<#=i.FuncI("IntPtr", "getLabeledCloud", "")#>
+		<#=i.FuncI("void", "getSupervoxelAdjacency", "IntPtr adjacency")#>
 
 		//properties
 		<#=i.Prop("VoxelResolution", "float")#>
+		<#=i.Prop("SeedResolution", "float")#>
 	}
 
 	public class SupervoxelClusteringOf<#=ClassName#> : SupervoxelClustering<<#=csin#>>
@@ -60,6 +80,11 @@ namespace PclSharp.Segmentation
 		public float VoxelResolution
 		{
 			<#=i.InvokeP("VoxelResolution", "float")#>
+		}
+
+		public float SeedResolution
+		{
+			<#=i.InvokeP("SeedResolution", "float")#>
 		}
 
 		public SupervoxelClusteringOf<#=ClassName#>(float voxelResolution, float seedResolution)
@@ -72,10 +97,28 @@ namespace PclSharp.Segmentation
 			<#=i.InvokeI("setInputCloud", "cloud")#>;
 		}
 
+		public override void SetNormalCloud(PointCloud<Normal> cloud)
+			=> <#=i.InvokeI("setNormalCloud", "cloud")#>;
+
+		public override void SetColorImportance(float value)
+			=> <#=i.InvokeI("setColorImportance", "value")#>;
+
+		public override void SetNormalImportance(float value)
+			=> <#=i.InvokeI("setNormalImportance", "value")#>;
+
+		public override void SetSpatialImportance(float value)
+			=> <#=i.InvokeI("setSpatialImportance", "value")#>;
+
 		public override void Extract(SupervoxelClusters<<#=csin#>> clusters)
 		{
 			<#=i.InvokeI("extract", "clusters")#>;
 		}
+
+		public override void RefineSupervoxels(int iterations, SupervoxelClusters<<#=csin#>> clusters)
+			=> <#=i.InvokeI("refineSupervoxels", "iterations, clusters")#>;
+
+		public override PointCloud<PointXYZL> GetLabeledCloud()
+			=> new PointCloudOfXYZL(<#=i.InvokeI("getLabeledCloud")#>, true);
 
 		protected override void DisposeObject()
 		{
@@ -98,6 +141,7 @@ using namespace pcl;
 using namespace std;
 
 typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
+typedef boost::shared_ptr<PointCloud<Normal>> normal_cloud;
 
 #ifdef __cplusplus
 extern "C" {
@@ -119,12 +163,37 @@ extern "C" {
 	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
 }
 
+<#=i.ExportI("void", "setNormalCloud", "PointCloud<Normal>* cloud")#>
+{
+	ptr->setNormalCloud(normal_cloud(normal_cloud(), cloud));
+}
+
 <#=i.ExportI("void", "extract", "map<uint32_t, Supervoxel<cppin>::Ptr>* clusters")#>
 {
 	ptr->extract(*clusters);
 }
 
+<#=i.ExportI("void", "refineSupervoxels", "int iterations, map<uint32_t, Supervoxel<cppin>::Ptr>* clusters")#>
+{ ptr->refineSupervoxels(iterations, *clusters); }
+
+<#=i.ExportI("PointCloud<PointXYZL>*", "getLabeledCloud", "")#>
+{ return ptr->getLabeledCloud().get(); }
+
+<#=i.ExportI("void", "getSupervoxelAdjacency", "std::multimap< uint32_t, uint32_t >* multimap")#>
+{ ptr->getSupervoxelAdjacency(*multimap); }
+
+<#=i.ExportI("void", "setColorImportance", "float value")#>
+{ ptr->setColorImportance(value); }
+
+<#=i.ExportI("void", "setNormalImportance", "float value")#>
+{ ptr->setNormalImportance(value); }
+
+<#=i.ExportI("void", "setSpatialImportance", "float value")#>
+{ ptr->setSpatialImportance(value); }
+
 <#=i.ExportP("VoxelResolution", "float")#>
+
+<#=i.ExportP("SeedResolution", "float")#>
 
 #ifdef __cplusplus  
 }

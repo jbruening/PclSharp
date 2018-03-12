@@ -124,6 +124,9 @@
     <Compile Include="PointCloudOfXYZ.generated.cs">
       <DependentUpon>PointCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="PointCloudOfXYZL.generated.cs">
+      <DependentUpon>PointCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="PointCloudOfXYZRGBA.generated.cs">
       <DependentUpon>PointCloud.tt</DependentUpon>
     </Compile>
@@ -209,6 +212,9 @@
       <DependentUpon>VectorOfUnmanaged.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfXYZ.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\VectorOfXYZL.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
     <Compile Include="Std\VectorOfXYZRGBA.generated.cs">

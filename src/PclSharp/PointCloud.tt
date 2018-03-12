@@ -10,6 +10,7 @@
 	var manager = Manager.Create(Host, GenerationEnvironment);
 	outputClass(manager, "XYZ", "PointXYZ", "PointXYZ");
 	outputClass(manager, "XYZRGBA", "PointXYZRGBA", "PointXYZRGBA");
+	outputClass(manager, "XYZL", "PointXYZL", "PointXYZL");
 	outputClass(manager, "Normal", "Normal", "Normal");
 	manager.Process(true);
 #>
@@ -62,6 +63,8 @@ namespace PclSharp
 
 	public unsafe class PointCloudOf<#=ClassName#> : PointCloud<<#=csClass#>>
 	{
+		private bool _suppressDispose;
+
 		public override int Width 
 		{
 			get { return (int)<#=i.InvokeI("width")#>; }
@@ -90,6 +93,12 @@ namespace PclSharp
 			_points = new VectorOf<#=ClassName#>(<#=i.InvokeI("points")#>);
 		}
 
+		internal PointCloudOf<#=ClassName#>(IntPtr ptr, bool suppressDispose)
+			:this(ptr)
+		{
+			_suppressDispose = suppressDispose;
+		}
+
 		public PointCloudOf<#=ClassName#>() 
 			: this(<#=i.Invoke("ctor")#>)
 		{
@@ -113,6 +122,8 @@ namespace PclSharp
 
 		protected override void DisposeObject()
 		{
+			if (_suppressDispose)
+				return;
 			<#=i.DeleteI()#>;
 		}
 	}

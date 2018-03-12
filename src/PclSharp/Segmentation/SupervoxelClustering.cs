@@ -2,12 +2,22 @@
 using PclSharp.Common;
 using PclSharp.Search;
 using PclSharp.Std;
+using PclSharp.Struct;
 
 namespace PclSharp.Segmentation
 {
 	public abstract class SupervoxelClustering<PointT> : UnmanagedObject
 	{
 		public abstract void SetInputCloud(PointCloud<PointT> cloud);
+		public abstract void SetNormalCloud(PointCloud<Normal> cloud);
 		public abstract void Extract(SupervoxelClusters<PointT> clusters);
+		
+		public abstract void SetColorImportance(float value);
+		public abstract void SetNormalImportance(float value);
+		public abstract void SetSpatialImportance(float value);
+
+		public abstract void RefineSupervoxels(int iterations, SupervoxelClusters<PointT> clusters);
+
+		public abstract PointCloud<PointXYZL> GetLabeledCloud();
 	}
 }

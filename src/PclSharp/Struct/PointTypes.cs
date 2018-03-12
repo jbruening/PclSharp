@@ -50,7 +50,7 @@ namespace PclSharp.Struct
         public fixed float data_c[4];
     }
 
-    [DebuggerDisplay("{X}, {Y}, {Z}, {Curvature}")]
+    [DebuggerDisplay("{NormalX}, {NormalY}, {NormalZ}, {Curvature}")]
     [StructLayout(LayoutKind.Explicit, Size = 32)]
     public unsafe struct Normal
     {
