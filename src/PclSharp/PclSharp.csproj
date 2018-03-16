@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelCoefficients.tt</DependentUpon>
     </Compile>
+    <Compile Include="Eigen\Vector3i.cs" />
     <Compile Include="Eigen\VectorXf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -18,6 +18,12 @@ namespace PclSharp.Filters
 	{
 		public abstract (double min, double max) FilterLimits { get; set; }
 		public abstract string FilterFieldName { get; set; }
+		public abstract bool DownsampleAllData { get; set; }
+		public abstract int MinimumPointsNumberPerVoxel { get; set; }
+		public abstract Eigen.Vector3i MinBoxCoordinates { get; }
+		public abstract Eigen.Vector3i MaxBoxCoordinates { get; }
+		public abstract Eigen.Vector3i NrDivisions { get; }
+		public abstract Eigen.Vector3i DivisionMultiplier { get; }
 	}
 }
 <#+ void outputClass(Manager manager, string ClassName, string csin, string cppin)
@@ -52,6 +58,20 @@ namespace PclSharp.Filters
 		//properties
 		<#=i.FuncI("PointXYZ", "getLeafSize", "")#>
 		<#=i.FuncI("void", "setLeafSize", "PointXYZ size")#>
+		
+		<#=i.FuncI("void", "setFilterFieldName", "string name")#>
+		<#=i.FuncI("void", "getFilterFieldName", "IntPtr str, int dstSz")#>
+		
+		<#=i.FuncI("void", "getFilterLimits", "ref double min, ref double max")#>
+		<#=i.FuncI("void", "setFilterLimits", "double min, double max")#>
+
+		<#=i.Prop("DownsampleAllData", "bool") #>
+		<#=i.Prop("MinimumPointsNumberPerVoxel", "int")#>
+
+		<#=i.FuncI("Eigen.Vector3i", "getMinBoxCoordinates", "")#>
+		<#=i.FuncI("Eigen.Vector3i", "getMaxBoxCoordinates", "")#>
+		<#=i.FuncI("Eigen.Vector3i", "getNrDivisions", "")#>
+		<#=i.FuncI("Eigen.Vector3i", "getDivisionMultiplier", "")#>
 	}
 
 	public class VoxelGridOf<#=ClassName#> : VoxelGrid<<#=csin#>>
@@ -62,16 +82,49 @@ namespace PclSharp.Filters
 			set { <#=i.InvokeI("setLeafSize", "value")#>; }
 		}
 
+		public override Eigen.Vector3i MinBoxCoordinates
+			=> <#=i.InvokeI("getMinBoxCoordinates")#>;
+
+		public override Eigen.Vector3i MaxBoxCoordinates
+			=> <#=i.InvokeI("getMaxBoxCoordinates")#>;
+
+		public override Eigen.Vector3i NrDivisions
+			=> <#=i.InvokeI("getNrDivisions")#>;
+
+		public override Eigen.Vector3i DivisionMultiplier
+			=> <#=i.InvokeI("getDivisionMultiplier")#>;
+
 		public override (double min, double max) FilterLimits
 		{
-			get { throw new NotImplementedException(); }
-			set { throw new NotImplementedException(); }
+			get
+			{
+				var min = double.MaxValue; var max = double.MinValue;
+				<#=i.InvokeI("getFilterLimits", "ref min, ref max")#>;
+				return (min, max);
+			}
+			set { <#=i.InvokeI("setFilterLimits", "value.min, value.max")#>; }
 		}
 
-		public override string FilterFieldName
+		public unsafe override string FilterFieldName
 		{
-			get { throw new NotImplementedException(); }
-			set { throw new NotImplementedException(); }
+			get 
+			{
+				byte* str = stackalloc byte[16];
+				<#=i.InvokeI("getFilterFieldName", "(IntPtr)str, 15")#>;
+				str[15] = 0; //just in case the string was too long and they didn't write the null terminator.
+				return Marshal.PtrToStringAnsi((IntPtr)str);
+			}
+			set { <#=i.InvokeI("setFilterFieldName", "value")#>; }
+		}
+
+		public override bool DownsampleAllData
+		{
+			<#=i.InvokeP("DownsampleAllData", "bool")#>
+		}
+
+		public override int MinimumPointsNumberPerVoxel
+		{
+			<#=i.InvokeP("MinimumPointsNumberPerVoxel", "int")#>
 		}
 
 		public VoxelGridOf<#=ClassName#>()
@@ -158,6 +211,34 @@ extern "C" {
 {
 	ptr->setLeafSize(Eigen::Vector4f(size.x, size.y, size.z, 1));
 }
+
+<#=i.ExportI("void", "setFilterFieldName", "const char* str")#>
+{ ptr->setFilterFieldName(string(str)); }
+
+<#=i.ExportI("void", "getFilterFieldName", "char* str, int dstSz")#>
+{ strcpy_s(str, dstSz, ptr->getFilterFieldName().c_str()); }
+
+<#=i.ExportI("void", "getFilterLimits", "double* min, double* max")#>
+{ ptr->getFilterLimits(*min, *max); }
+
+<#=i.ExportI("void", "setFilterLimits", "double min, double max")#>
+{ ptr->setFilterLimits(min, max); }
+
+<#=i.ExportP("DownsampleAllData", "int")#>
+
+<#=i.ExportP("MinimumPointsNumberPerVoxel", "int")#>
+
+<#=i.ExportI("Eigen::Vector3i", "getMinBoxCoordinates", "")#>
+{ return ptr->getMinBoxCoordinates(); }
+
+<#=i.ExportI("Eigen::Vector3i", "getMaxBoxCoordinates", "")#>
+{ return ptr->getMaxBoxCoordinates(); }
+
+<#=i.ExportI("Eigen::Vector3i", "getNrDivisions", "")#>
+{ return ptr->getNrDivisions(); }
+
+<#=i.ExportI("Eigen::Vector3i", "getDivisionMultiplier", "")#>
+{ return ptr->getDivisionMultiplier(); }
 
 #ifdef __cplusplus  
 }
