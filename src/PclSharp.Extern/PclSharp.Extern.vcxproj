@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="PointSizes.h" />
     <ClCompile Include="common\*.h" />
+    <ClCompile Include="eigen\*.h" />
     <ClCompile Include="features\*.h" />
     <ClCompile Include="filters\*.h" />
     <ClCompile Include="io\*.h" />

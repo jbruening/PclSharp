@@ -132,6 +132,11 @@ namespace PclSharp.Std
 			_ptr = <#=i.Invoke("ctor")#>;
 		}
 
+		public VectorOf<#= ClassName #>(int count)
+		{
+			_ptr = <#=i.Invoke("ctor_count", "count")#>;
+		}
+
 		/// <summary>
         /// construct as a copy of the list
         /// </summary>

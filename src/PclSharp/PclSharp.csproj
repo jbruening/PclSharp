@@ -78,7 +78,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelCoefficients.tt</DependentUpon>
     </Compile>
-    <Compile Include="Eigen\VectorXf.cs" />
+    <Compile Include="Eigen\VectorXf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VectorXf.tt</DependentUpon>
+    </Compile>
     <Compile Include="Features\Feature.cs" />
     <Compile Include="Features\IntegralImageNormalEstimation.cs" />
     <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
@@ -233,6 +237,10 @@
     <Content Include="Common\ModelCoefficients.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelCoefficients.cs</LastGenOutput>
+    </Content>
+    <Content Include="Eigen\VectorXf.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VectorXf.cs</LastGenOutput>
     </Content>
     <Content Include="Features\IntegralImageNormalEstimation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

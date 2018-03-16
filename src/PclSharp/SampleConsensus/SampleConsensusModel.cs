@@ -44,5 +44,6 @@ namespace PclSharp.SampleConsensus
         public abstract void GetSamples(int iterations, Std.VectorOfInt samples);
         public abstract bool ComputeModelCoefficients(Std.VectorOfInt samples, VectorXf modelCoefficients);
         public abstract void OptimizeModelCoefficients(Std.VectorOfInt inliers, VectorXf modelCoefficients, VectorXf optimizedCoefficients);
+        public abstract void SelectWithinDistance(VectorXf modelCoefficients, double distance, Std.VectorOfInt inliers);
     }
 }

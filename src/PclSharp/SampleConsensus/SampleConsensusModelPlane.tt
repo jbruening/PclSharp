@@ -49,26 +49,23 @@ namespace PclSharp.SampleConsensus
 		<#=i.Delete()#>
 
 		//methods
+		<#=i.FuncI("void", "setInputCloud", "IntPtr cloud")#>
+		<#=i.FuncI("void", "setIndices", "IntPtr indices")#>
+		<#=i.FuncI("void", "selectWithinDistance", "IntPtr modelCoefficients, double distance, IntPtr inliers")#>
 		<#=i.FuncI("void", "getSamples", "int iterations, IntPtr samples")#>
 		<#=i.FuncI("void", "optimizeModelCoefficients", "IntPtr inliers, IntPtr modelCoefficients, IntPtr optimizedCoefficients")#>
+		<#=i.FuncI("bool", "computeModelCoefficients", "IntPtr samples, IntPtr modelCoefficients")#>
 	}
 
 	public class SampleConsensusModelPlaneOf<#=ClassName#> : SampleConsensusModelPlane<<#=csClass#>>
 	{
-		public SampleConsensusModelPlaneOf<#=ClassName#>()
+		public SampleConsensusModelPlaneOf<#=ClassName#>(PointCloud<<#=csClass#>> cloud = null, Std.VectorOfInt indices = null)
 		{
-			_ptr = <#=i.Invoke("ctor_indices", "IntPtr.Zero, IntPtr.Zero")#>;
-		}
-
-		public SampleConsensusModelPlaneOf<#=ClassName#>(PointCloud<<#=csClass#>> cloud, Std.VectorOfInt indices)
-		{
-			_ptr = <#=i.Invoke("ctor_indices", "cloud.Ptr, indices.Ptr")#>;
+			_ptr = <#=i.Invoke("ctor_indices", "cloud, indices")#>;
 		}
 
 		public override bool ComputeModelCoefficients(VectorOfInt samples, VectorXf modelCoefficients)
-        {
-            throw new NotImplementedException();
-        }
+			=> <#=i.InvokeI("computeModelCoefficients", "samples, modelCoefficients")#>;
 
         public override void GetSamples(int iterations, VectorOfInt samples)
         {
@@ -82,13 +79,18 @@ namespace PclSharp.SampleConsensus
 
         public override void SetIndices(VectorOfInt indices)
         {
-            throw new NotImplementedException();
+            <#=i.InvokeI("setIndices", "indices")#>;
         }
 
         public override void SetInputCloud(PointCloud<<#=csClass#>> cloud)
         {
-            throw new NotImplementedException();
+            <#=i.InvokeI("setInputCloud", "cloud")#>;
         }
+
+		public override void SelectWithinDistance(VectorXf modelCoefficients, double distance, Std.VectorOfInt inliers)
+		{
+			<#=i.InvokeI("selectWithinDistance", "modelCoefficients, distance, inliers")#>;
+		}
 
 		protected override void DisposeObject()
 		{
@@ -133,6 +135,15 @@ extern "C" {  // only need to export C interface if
 	*ptr = NULL;
 }
 
+<#=i.ExportI("void", "setIndices", "vector<int>* indices")#>
+{ ptr->setIndices(*indices); }
+
+<#=i.ExportI("void", "setInputCloud", "PointCloud<cppClass>* cloud")#>
+{ ptr->setInputCloud(boost_cloud(boost_cloud(), cloud)); }
+
+<#=i.ExportI("void", "selectWithinDistance", "Eigen::VectorXf* modelCoefficients, double distance, vector<int>* inliers")#>
+{ ptr-> selectWithinDistance(*modelCoefficients, distance, *inliers); }
+
 <#=i.ExportI("void", "getSamples", "int iterations, vector<int>* samples")#>
 {
 	ptr->getSamples(iterations, *samples);
@@ -142,6 +153,9 @@ extern "C" {  // only need to export C interface if
 {
 	ptr->optimizeModelCoefficients(*inliers, *modelCoefficients, *optimizedCoefficients);
 }
+
+<#=i.ExportI("int", "computeModelCoefficients", "vector<int>* samples, Eigen::VectorXf* modelCoefficients")#>
+{ return ptr->computeModelCoefficients(*samples, *modelCoefficients); }
 
 #ifdef __cplusplus  
 }
