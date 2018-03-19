@@ -126,6 +126,7 @@
     <ClInclude Include="export.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="filters\HeightMap2D.hpp" />
     <ClCompile Include="PointSizes.h" />
     <ClCompile Include="common\*.h" />
     <ClCompile Include="eigen\*.h" />

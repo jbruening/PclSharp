@@ -15,6 +15,8 @@ namespace PclSharp.Eigen
 
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern void eigen_vectorx_f_resize(IntPtr ptr, int size);
+		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
+		public static extern void eigen_vectorx_f_normalize(IntPtr ptr);
 
 		[DllImport(Native.DllName, CallingConvention=Native.CallingConvention)]
 		public static extern float eigen_vectorx_f_getIndex(IntPtr ptr, int idx);
@@ -54,6 +56,9 @@ namespace PclSharp.Eigen
 
 		public void Resize(int count)
 			=> Invoke.eigen_vectorx_f_resize(_ptr, count);
+
+		public void Normalize()
+			=> Invoke.eigen_vectorx_f_normalize(_ptr);
 
 		public float this[int i]
 		{

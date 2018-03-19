@@ -29,6 +29,7 @@ namespace PclSharp.Eigen
 		<#= i.Delete() #>
 
 		<#= i.FuncI("void", "resize", "int size")#>
+		<#=i.FuncI("void", "normalize", "")#>
 
 		<#= i.FuncI("float", "getIndex", "int idx")#>
 		<#= i.FuncI("void", "setIndex", "int idx, float value")#>
@@ -64,6 +65,9 @@ namespace PclSharp.Eigen
 
 		public void Resize(int count)
 			=> <#=i.InvokeI("resize", "count")#>;
+
+		public void Normalize()
+			=> <#=i.InvokeI("normalize", "")#>;
 
 		public float this[int i]
 		{
@@ -108,6 +112,9 @@ extern "C" {
 
 <#=i.ExportI("void", "resize", "int count")#>
 { ptr->resize(count); }
+
+<#=i.ExportI("void", "normalize", "")#>
+{ ptr->normalize(); }
 
 <#=i.ExportI("void", "setIndex", "int idx, float value")#>
 { ptr->operator[](idx) = value; }

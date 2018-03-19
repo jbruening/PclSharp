@@ -99,6 +99,14 @@
       <DependentUpon>ExtractIndices.tt</DependentUpon>
     </Compile>
     <Compile Include="Filters\FilterIndices.cs" />
+    <Compile Include="Filters\Heightmap2D.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Heightmap2D.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\HeightMap2DOfXYZ.generated.cs">
+      <DependentUpon>Heightmap2D.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\StatisticalOutlierRemoval.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -255,6 +263,10 @@
     <Content Include="Filters\ExtractIndices.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ExtractIndices.cs</LastGenOutput>
+    </Content>
+    <Content Include="Filters\Heightmap2D.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Heightmap2D.cs</LastGenOutput>
     </Content>
     <Content Include="Filters\StatisticalOutlierRemoval.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
