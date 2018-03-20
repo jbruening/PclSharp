@@ -187,8 +187,8 @@ namespace pcl
 			{
 				buckets_.clear();
 
-				bmin_ = Vector2i(INT_MAX, INT_MAX);
-				bmax_ = Vector2i(-INT_MAX, -INT_MAX);
+				//Vector2i bmin_(INT_MAX, INT_MAX);
+				//Vector2i bmax_(-INT_MAX, -INT_MAX);
 
 				max_buckets_.clear();
 				maxima_cloud_indices_filtered_.clear();
@@ -206,8 +206,8 @@ namespace pcl
 					int iix = pp[0] / bin_size_;
 					int iiy = pp[1] / bin_size_;
 					auto index = Vector2i(iix, iiy);
-					bmin_ = bmin_.cwiseMin(index);
-					bmax_ = bmax_.cwiseMax(index);
+					//bmin_ = bmin_.cwiseMin(index);
+					//bmax_ = bmax_.cwiseMax(index);
 
 					// compute point height from the groundplane
 					float heightp = p.dot(normal) + ground_coeffs_(3);
@@ -244,9 +244,6 @@ namespace pcl
 			std::vector<int> maxima_cloud_indices_filtered_;
 
 			float min_dist_between_maxima_;
-
-			Eigen::Vector2i bmin_;
-			Eigen::Vector2i bmax_;
 			float bin_size_;
 
 			int maxima_number_;
