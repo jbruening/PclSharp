@@ -3,9 +3,31 @@
 #include <pcl/filters/boost.h>
 #include <pcl/filters/filter.h>
 #include <map>
+#include <unordered_map>
 
 using namespace Eigen;
 using namespace std;
+
+namespace std {
+
+	template <>
+	struct hash<Eigen::Vector2i>
+	{
+		std::size_t operator()(const Eigen::Vector2i& k) const
+		{
+			using std::size_t;
+			using std::hash;
+			using std::string;
+
+			// Compute individual hash values for first,
+			// second and third and combine them using XOR
+			// and bit shifting:
+
+			return ((hash<int>()(k[0])
+				^ (hash<int>()(k[1]) << 1)) >> 1);
+		}
+	};
+}
 
 namespace pcl
 {
@@ -186,6 +208,7 @@ namespace pcl
 			void filter()
 			{
 				buckets_.clear();
+				buckets_.reserve(indices_.size());
 
 				//Vector2i bmin_(INT_MAX, INT_MAX);
 				//Vector2i bmax_(-INT_MAX, -INT_MAX);
@@ -238,7 +261,7 @@ namespace pcl
 
 			Eigen::VectorXf ground_coeffs_;
 			
-			std::map<Eigen::Vector2i, MPoint, CmpVector2i> buckets_;
+			std::unordered_map<Eigen::Vector2i, MPoint> buckets_;
 
 			std::vector<MPoint> max_buckets_;
 			std::vector<int> maxima_cloud_indices_filtered_;
