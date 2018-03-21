@@ -208,7 +208,7 @@ namespace pcl
 			void filter()
 			{
 				buckets_.clear();
-				buckets_.reserve(indices_.size());
+				buckets_.reserve(indices_->size());
 
 				//Vector2i bmin_(INT_MAX, INT_MAX);
 				//Vector2i bmax_(-INT_MAX, -INT_MAX);
