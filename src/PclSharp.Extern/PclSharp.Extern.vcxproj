@@ -138,6 +138,7 @@
     <ClCompile Include="search\*.h" />
     <ClCompile Include="segmentation\*.h" />
     <ClCompile Include="std\*.h" />
+    <ClCompile Include="surface\*.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -154,6 +154,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PointIndices.tt</DependentUpon>
     </Compile>
+    <Compile Include="PolygonMesh.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PolygonMesh.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleConsensus\SampleConsensusModel.cs" />
     <Compile Include="SampleConsensus\SampleConsensusModelPlaneOfXYZ.generated.cs">
@@ -225,6 +230,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
+    <Compile Include="Std\VectorOfUInt.generated.cs">
+      <DependentUpon>VectorOfStruct.tt</DependentUpon>
+    </Compile>
     <Compile Include="Std\VectorOfUnmanaged.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,6 +248,16 @@
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
     <Compile Include="Struct\PointTypes.cs" />
+    <Compile Include="Surface\ConvexHull.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConvexHull.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Surface\ConvexHullOfXYZ.generated.cs">
+      <DependentUpon>ConvexHull.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Surface\MeshConstruction.cs" />
+    <Compile Include="Surface\SurfaceBase.cs" />
     <Compile Include="UnmanagedObject.cs" />
     <Compile Include="Utils\PointSizes.cs" />
   </ItemGroup>
@@ -308,6 +326,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PointIndices.cs</LastGenOutput>
     </Content>
+    <Content Include="PolygonMesh.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PolygonMesh.cs</LastGenOutput>
+    </Content>
     <Content Include="SampleConsensus\SampleConsensusModelPlane.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SampleConsensusModelPlane.cs</LastGenOutput>
@@ -339,6 +361,10 @@
     <Content Include="Std\VectorOfUnmanaged.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorOfUnmanaged.cs</LastGenOutput>
+    </Content>
+    <Content Include="Surface\ConvexHull.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConvexHull.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

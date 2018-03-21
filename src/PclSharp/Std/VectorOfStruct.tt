@@ -14,6 +14,7 @@
 	string cppVector = null;
 
 	outputClass(manager, "Int", "int", "int", new VectorParms());
+	outputClass(manager, "UInt", "uint", "uint32_t", new VectorParms());
 	outputClass(manager, "Byte", "byte", "unsigned char", new VectorParms());
 	outputClass(manager, "Float", "float", "float", new VectorParms());
 
