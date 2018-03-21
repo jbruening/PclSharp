@@ -98,6 +98,11 @@ namespace PclSharp.Filters
 			<#=i.InvokeI("setIndices", "indices")#>;
 		}
 
+		public override ref <#=csin#> this[int idx]
+		{
+			get { return ref this.Index(idx); }
+		}
+
 		protected override void DisposeObject()
 		{
 			<#=i.DeleteI()#>;

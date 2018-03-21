@@ -130,6 +130,12 @@
     </Compile>
     <Compile Include="Native.cs" />
     <Compile Include="PclBase.cs" />
+    <Compile Include="PclBaseOfXYZ.generated.cs">
+      <DependentUpon>PclBaseOf.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PclBaseOfXYZRGBA.generated.cs">
+      <DependentUpon>PclBaseOf.tt</DependentUpon>
+    </Compile>
     <Compile Include="PointCloud.cs" />
     <Compile Include="PointCloudOfNormal.generated.cs">
       <DependentUpon>PointCloud.tt</DependentUpon>
@@ -279,6 +285,15 @@
     <Content Include="IO\PCDReader.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PCDReader.cs</LastGenOutput>
+    </Content>
+    <Content Include="PclBaseOf.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PclBaseOf.txt</LastGenOutput>
+    </Content>
+    <Content Include="PclBaseOf.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PclBaseOf.tt</DependentUpon>
     </Content>
     <Content Include="PointCloud.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
