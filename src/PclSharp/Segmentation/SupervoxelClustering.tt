@@ -19,9 +19,8 @@ using PclSharp.Struct;
 
 namespace PclSharp.Segmentation
 {
-	public abstract class SupervoxelClustering<PointT> : UnmanagedObject
+	public abstract class SupervoxelClustering<PointT> : PclBase<PointT>
 	{
-		public abstract void SetInputCloud(PointCloud<PointT> cloud);
 		public abstract void SetNormalCloud(PointCloud<Normal> cloud);
 		public abstract void Extract(SupervoxelClusters<PointT> clusters);
 		
@@ -50,6 +49,8 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using PclSharp.Struct;
+using PclSharp.Std;
+
 namespace PclSharp.Segmentation
 {
 	public static partial class Invoke
@@ -59,6 +60,7 @@ namespace PclSharp.Segmentation
 
 		//methods
 		<#=i.FuncI("setInputCloud", "IntPtr cloud")#>
+		<#= i.FuncI("setIndices", "IntPtr indices")#>
 		<#=i.FuncI("setNormalCloud", "IntPtr cloud")#>
 		<#=i.FuncI("extract", "IntPtr clusters")#>
 		<#=i.FuncI("setColorImportance", "float value")#>
@@ -96,6 +98,9 @@ namespace PclSharp.Segmentation
 		{
 			<#=i.InvokeI("setInputCloud", "cloud")#>;
 		}
+
+		public override void SetIndices(VectorOfInt indices)
+			=> <#=i.InvokeI("setIndices", "indices")#>;
 
 		public override void SetNormalCloud(PointCloud<Normal> cloud)
 			=> <#=i.InvokeI("setNormalCloud", "cloud")#>;
@@ -142,6 +147,7 @@ using namespace std;
 
 typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
 typedef boost::shared_ptr<PointCloud<Normal>> normal_cloud;
+typedef boost::shared_ptr<vector<int>> boost_indices;
 
 #ifdef __cplusplus
 extern "C" {
@@ -162,6 +168,9 @@ extern "C" {
 {
 	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
 }
+
+<#= i.ExportI("void", "setIndices", "std::vector<int>* indices")#>
+{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
 
 <#=i.ExportI("void", "setNormalCloud", "PointCloud<Normal>* cloud")#>
 {

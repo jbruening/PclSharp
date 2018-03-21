@@ -5,9 +5,8 @@ using PclSharp.Std;
 
 namespace PclSharp.Segmentation
 {
-	public abstract class EuclideanClusterExtraction<PointT> : UnmanagedObject
+	public abstract class EuclideanClusterExtraction<PointT> : PclBase<PointT>
 	{
-		public abstract void SetInputCloud(PointCloud<PointT> cloud);
 		public abstract void SetSearchMethod(Search<PointT> search);
 		public abstract void Extract(Vector<PointIndices> clusters);
 	}

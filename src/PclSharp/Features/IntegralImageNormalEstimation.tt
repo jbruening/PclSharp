@@ -45,6 +45,7 @@ namespace PclSharp.Features
 		<#= i.FuncI("setMaxDepthChangeFactor", "float factor")#>
 		<#= i.FuncI("setNormalSmoothingSize", "float size")#>
 		<#= i.FuncI("setInputCloud", "IntPtr cloud")#>
+		<#= i.FuncI("setIndices", "IntPtr indices")#>
 		<#= i.FuncI("compute", "IntPtr cloud")#>
 	}
 
@@ -73,6 +74,9 @@ namespace PclSharp.Features
 		public override void SetInputCloud(PointCloud<<#=csin#>> cloud) 
 			=> <#=i.InvokeI("setInputCloud", "cloud.Ptr")#>;
 
+		public override void SetIndices(VectorOfInt indices)
+			=> <#=i.InvokeI("setIndices", "indices")#>;
+
 		public override void Compute(PointCloud<<#=csout#>> cloud) 
 			=> <#=i.InvokeI("compute", "cloud.Ptr")#>;
 
@@ -98,6 +102,7 @@ using namespace std;
 
 typedef <#=cppWrapper#> integral_image;
 typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
+typedef boost::shared_ptr<vector<int>> boost_indices;
 
 #ifdef __cplusplus  
 extern "C" {  // only need to export C interface if  
@@ -139,6 +144,10 @@ extern "C" {  // only need to export C interface if
 {
 	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
 }
+
+<#= i.ExportI("void", "setIndices", "std::vector<int>* indices")#>
+{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
+
 <#= i.ExportI("void", "compute", "PointCloud<cppout>* cloud")#>
 {
 	ptr->compute(*cloud);

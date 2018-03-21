@@ -17,14 +17,13 @@ using PclSharp.Common;
 
 namespace PclSharp.Segmentation
 {
-	public abstract class SACSegmentation<PointT> : UnmanagedObject
+	public abstract class SACSegmentation<PointT> : PclBase<PointT>
 	{
 		public abstract SACModel ModelType { get; set; }
 		public abstract int MaxIterations { get; set; }
 		public abstract SACMethod MethodType { get; set; }
 		public abstract double DistanceThreshold { get; set; }
 
-		public abstract void SetInputCloud(PointCloud<PointT> cloud);
 		public abstract void Segment(PointIndices inliers, ModelCoefficients coefficients);
 	}
 }
@@ -57,6 +56,7 @@ namespace PclSharp.Segmentation
 
 		//methods
 		<#=i.FuncI("setInputCloud", "IntPtr cloud")#>
+		<#= i.FuncI("setIndices", "IntPtr indices")#>
 		<#=i.FuncI("segment", "IntPtr inliers, IntPtr coefficients")#>
 
 		//properties
@@ -104,6 +104,9 @@ namespace PclSharp.Segmentation
 			<#=i.InvokeI("setInputCloud", "cloud")#>;
 		}
 
+		public override void SetIndices(VectorOfInt indices)
+			=> <#=i.InvokeI("setIndices", "indices")#>;
+
 		public override void Segment(PointIndices inliers, ModelCoefficients coefficients)
 		{
 			<#=i.InvokeI("segment", "inliers, coefficients")#>;
@@ -130,6 +133,7 @@ using namespace pcl;
 using namespace std;
 
 typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
+typedef boost::shared_ptr<vector<int>> boost_indices;
 
 #ifdef __cplusplus
 extern "C" {
@@ -150,6 +154,9 @@ extern "C" {
 {
 	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
 }
+
+<#= i.ExportI("void", "setIndices", "std::vector<int>* indices")#>
+{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
 
 <#=i.ExportI("void", "segment", "PointIndices* inliers, ModelCoefficients* coefficients")#>
 {

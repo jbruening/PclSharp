@@ -18,9 +18,8 @@ using PclSharp.Std;
 
 namespace PclSharp.Segmentation
 {
-	public abstract class EuclideanClusterExtraction<PointT> : UnmanagedObject
+	public abstract class EuclideanClusterExtraction<PointT> : PclBase<PointT>
 	{
-		public abstract void SetInputCloud(PointCloud<PointT> cloud);
 		public abstract void SetSearchMethod(Search<PointT> search);
 		public abstract void Extract(Vector<PointIndices> clusters);
 	}
@@ -55,6 +54,7 @@ namespace PclSharp.Segmentation
 
 		//methods
 		<#=i.FuncI("setInputCloud", "IntPtr cloud")#>
+		<#= i.FuncI("setIndices", "IntPtr indices")#>
 		<#=i.FuncI("setSearchMethod", "IntPtr search")#>
 		<#=i.FuncI("extract", "IntPtr clusters")#>
 
@@ -91,6 +91,9 @@ namespace PclSharp.Segmentation
 			<#=i.InvokeI("setInputCloud", "cloud")#>;
 		}
 
+		public override void SetIndices(VectorOfInt indices)
+			=> <#=i.InvokeI("setIndices", "indices")#>;
+
 		public override void SetSearchMethod(Search<<#=csin#>> search)
 		{
 			<#=i.InvokeI("setSearchMethod", "search")#>;
@@ -123,6 +126,7 @@ using namespace std;
 
 typedef boost::shared_ptr<PointCloud<<#=cppin#>>> boost_cloud;
 typedef boost::shared_ptr<pcl::search::Search<<#=cppin#>>> search_ptr;
+typedef boost::shared_ptr<vector<int>> boost_indices;
 
 #ifdef __cplusplus
 extern "C" {
@@ -143,6 +147,9 @@ extern "C" {
 {
 	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
 }
+
+<#= i.ExportI("void", "setIndices", "std::vector<int>* indices")#>
+{ ptr->setIndices(boost_indices(boost_indices(), indices)); }
 
 <#=i.ExportI("void", "setSearchMethod", "pcl::search::Search<cppin>* search")#>
 {

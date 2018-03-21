@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static PclSharp.Features.IntegralImageNormalEstimation;
 
 namespace PclSharp.Features
@@ -31,6 +28,5 @@ namespace PclSharp.Features
         public abstract void SetNormalEstimationMethod(NormalEstimationMethod method);
         public abstract void SetMaxDepthChangeFactor(float factor);
         public abstract void SetNormalSmoothingSize(float size);
-        public abstract void SetInputCloud(PointCloud<PointInT> cloud);
     }
 }

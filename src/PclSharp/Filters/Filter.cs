@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace PclSharp.Filters
 {
-    public abstract class Filter<PointT> : UnmanagedObject
+    public abstract class Filter<PointT> : PclBase<PointT>
     {
         public abstract void filter(PointCloud<PointT> output);
-        public abstract void SetInputCloud(PointCloud<PointT> cloud);
-        public abstract void SetIndices(VectorOfInt indices);
     }
 }
