@@ -85,6 +85,14 @@
       <DependentUpon>VectorXf.tt</DependentUpon>
     </Compile>
     <Compile Include="Features\Feature.cs" />
+    <Compile Include="Features\FPFHEstimation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FPFHEstimation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Features\FPFHEstimationOfPointXYZAndNormal.generated.cs">
+      <DependentUpon>FPFHEstimation.tt</DependentUpon>
+    </Compile>
     <Compile Include="Features\IntegralImageNormalEstimation.cs" />
     <Compile Include="Features\IntegralImageNormalEstimationOfPointXYZAndNormal.generated.cs">
       <DependentUpon>IntegralImageNormalEstimation.tt</DependentUpon>
@@ -210,6 +218,14 @@
     <Compile Include="Segmentation\SupervoxelClustersOfXYZRGBA.generated.cs">
       <DependentUpon>SupervoxelClusters.tt</DependentUpon>
     </Compile>
+    <Compile Include="Std\MultiMap.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiMap.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Std\MultiMapOfuintAnduint.generated.cs">
+      <DependentUpon>MultiMap.tt</DependentUpon>
+    </Compile>
     <Compile Include="Std\VectorOfByte.generated.cs">
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
@@ -248,6 +264,7 @@
       <DependentUpon>VectorOfStruct.tt</DependentUpon>
     </Compile>
     <Compile Include="Struct\PointTypes.cs" />
+    <Compile Include="Struct\Features.cs" />
     <Compile Include="Surface\ConvexHull.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -274,6 +291,10 @@
     <Content Include="Eigen\VectorXf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorXf.cs</LastGenOutput>
+    </Content>
+    <Content Include="Features\FPFHEstimation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FPFHEstimation.cs</LastGenOutput>
     </Content>
     <Content Include="Features\IntegralImageNormalEstimation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -353,6 +374,10 @@
     <Content Include="Segmentation\SupervoxelClusters.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SupervoxelClusters.cs</LastGenOutput>
+    </Content>
+    <Content Include="Std\MultiMap.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MultiMap.cs</LastGenOutput>
     </Content>
     <Content Include="Std\VectorOfStruct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -18,5 +18,6 @@ namespace PclSharp.Segmentation
 		public abstract void RefineSupervoxels(int iterations, SupervoxelClusters<PointT> clusters);
 
 		public abstract PointCloud<PointXYZL> GetLabeledCloud();
+		public abstract void GetSupervoxelAdjacency(MultiMap<uint, uint> adjacency);
 	}
 }

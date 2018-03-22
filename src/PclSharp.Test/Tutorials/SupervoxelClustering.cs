@@ -65,6 +65,18 @@ namespace PclSharp.Test.Tutorials
 
                     super.Extract(clusters);
                     Assert.IsTrue(clusters.Count > 0);
+
+                    using (var adjacency = new MultiMapOfuintAnduint())
+                    {
+                        super.GetSupervoxelAdjacency(adjacency);
+                        Assert.AreEqual(350, adjacency.Count);
+
+                        var i = 0;
+                        foreach (var kvp in adjacency)
+                            i++;
+
+                        Assert.AreEqual(350, i);
+                    }
                 }
             }
         }

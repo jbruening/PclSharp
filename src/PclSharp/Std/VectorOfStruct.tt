@@ -8,10 +8,6 @@
 <#@include file="..\InvokeTemplate.ttinclude"#>
 <# 
 	var manager = Manager.Create(Host, GenerationEnvironment);
-	string ClassName;
-	string csClass;
-	string cppClass;
-	string cppVector = null;
 
 	outputClass(manager, "Int", "int", "int", new VectorParms());
 	outputClass(manager, "UInt", "uint", "uint32_t", new VectorParms());

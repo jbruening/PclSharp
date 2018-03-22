@@ -47,10 +47,23 @@ namespace PclSharp.Features
 		<#= i.FuncI("setInputCloud", "IntPtr cloud")#>
 		<#= i.FuncI("setIndices", "IntPtr indices")#>
 		<#= i.FuncI("compute", "IntPtr cloud")#>
+
+		<#=i.Prop("KSearch", "int")#>
+		<#=i.Prop("RadiusSearch", "double")#>
 	}
 
 	public class IntegralImageNormalEstimation<#=ClassName#> : IntegralImageNormalEstimation<<#=csin#>,<#=csout#>>
 	{
+		public override int KSearch 
+		{ 
+			<#=i.InvokeP("KSearch", "int")#> 
+		}
+
+        public override double RadiusSearch 
+		{ 
+			<#=i.InvokeP("RadiusSearch", "int")#> 
+		}
+
 		public IntegralImageNormalEstimation<#=ClassName#>()
 		{
 			_ptr = <#=i.Invoke("ctor")#>;
@@ -145,18 +158,18 @@ extern "C" {  // only need to export C interface if
 {
 	ptr->setNormalSmoothingSize(size);
 }
+
 <#= i.ExportI("void", "setInputCloud", "PointCloud<cppin>* cloud")#>
-{
-	ptr->setInputCloud(boost_cloud(boost_cloud(), cloud));
-}
+{ ptr->setInputCloud(boost_cloud(boost_cloud(), cloud)); }
 
 <#= i.ExportI("void", "setIndices", "std::vector<int>* indices")#>
 { ptr->setIndices(boost_indices(boost_indices(), indices)); }
 
 <#= i.ExportI("void", "compute", "PointCloud<cppout>* cloud")#>
-{
-	ptr->compute(*cloud);
-}
+{ ptr->compute(*cloud); }
+
+<#=i.ExportP("KSearch", "int")#>
+<#=i.ExportP("RadiusSearch", "double")#>
 
 #ifdef __cplusplus  
 }

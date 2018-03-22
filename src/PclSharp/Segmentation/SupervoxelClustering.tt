@@ -31,6 +31,7 @@ namespace PclSharp.Segmentation
 		public abstract void RefineSupervoxels(int iterations, SupervoxelClusters<PointT> clusters);
 
 		public abstract PointCloud<PointXYZL> GetLabeledCloud();
+		public abstract void GetSupervoxelAdjacency(MultiMap<uint, uint> adjacency);
 	}
 }
 <#+ void outputClass(Manager manager, string ClassName, string csin, string cppin)
@@ -124,6 +125,9 @@ namespace PclSharp.Segmentation
 
 		public override PointCloud<PointXYZL> GetLabeledCloud()
 			=> new PointCloudOfXYZL(<#=i.InvokeI("getLabeledCloud")#>, true);
+
+		public override void GetSupervoxelAdjacency(MultiMap<uint, uint> adjacency)
+			=> <#=i.InvokeI("getSupervoxelAdjacency", "adjacency")#>;
 
 		public override ref <#=csin#> this[int idx]
 		{
