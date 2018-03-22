@@ -108,6 +108,13 @@ class InvokeT : IDisposable
 		FuncI(type, "get"+name, "");
 	}
 
+	public string Prop(string rType, string name, string type)
+	{
+		return
+		FuncI("void", "set"+name, type + " value") + "\r\n		" +
+		FuncI(rType, "get"+name, "");
+	}
+
 	public string Invoke(string name)
 	{
 		return Invoke(name, "");
@@ -138,6 +145,18 @@ class InvokeT : IDisposable
 		"set { " + InvokeI("set"+name, "value") + "; }";
 	}
 
+	public string InvokePP(string name, string type)
+	{
+		return
+		"get { return *" + InvokeI("get"+name, "") + "; }" + "\r\n            " +
+		"set { " + InvokeI("set"+name, "ref value") + "; }";
+	}
+
+	public string InvokePR(string name, string type)
+	{
+		return "get { return ref *" + InvokeI("get"+name, "") + "; }";
+	}
+
 	public string DeleteI()
 	{ return Invoke("delete", "ref _ptr");}
 
@@ -165,6 +184,13 @@ class InvokeT : IDisposable
 		"{ ptr->set"+name+"(value); }\r\n" +
 		ExportI(type, "get"+name, "") + "\r\n" +
 		"{ return ptr->get"+name+"(); }";
+	}
+
+	public string Deref(string parm, string type)
+	{
+		return @"//the value needs to be aligned to be pushed into the cloud, so do that.
+	"+type+@" deref;
+	memcpy(&deref, "+parm+@", sizeof("+type+@"));";
 	}
 }
 #>

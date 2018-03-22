@@ -46,6 +46,8 @@ namespace PclSharp.Segmentation
 		<#= i.Ctor() #>
 		<#= i.Delete() #>
 
+		<#=i.FuncI("IntPtr", "at", "uint key")#>
+
 		<#=i.FuncI("int", "count", "")#>
 	}
 
@@ -57,6 +59,9 @@ namespace PclSharp.Segmentation
 		{
 			_ptr = <#=i.Invoke("ctor")#>;
 		}
+
+		public SupervoxelOf<#=ClassName#> At(uint key)
+			=> new SupervoxelOf<#=ClassName#>(<#=i.InvokeI("at", "key")#>);
 
 		protected override void DisposeObject()
 		{
@@ -95,6 +100,9 @@ extern "C" {
 	delete *ptr;
 	*ptr = NULL;
 }
+
+<#=i.ExportI("Supervoxel<cppin>*", "at", "uint32_t key")#>
+{ return ptr->at(key).get(); }
 
 <#=i.ExportI("int", "count", "")#>
 { return ptr->size(); }

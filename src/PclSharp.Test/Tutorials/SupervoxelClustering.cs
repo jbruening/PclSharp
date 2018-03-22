@@ -22,6 +22,7 @@ namespace PclSharp.Test.Tutorials
             var normalImportance = 1f;
 
             using (var cloud = new PointCloudOfXYZRGBA())
+            using(var adjacentSupervoxelCenters = new PointCloudOfXYZRGBA())
             {
                 using (var reader = new PCDReader())
                     //Assert.AreEqual(0, reader.Read(DataPath("tutorials/correspondence_grouping/milk_cartoon_all_small_clorox.pcd"), cloud));
@@ -29,7 +30,7 @@ namespace PclSharp.Test.Tutorials
 
                 var min = new Vector3(float.MaxValue);
                 var max = new Vector3(float.MinValue);
-                foreach(var p in cloud.Points)
+                foreach (var p in cloud.Points)
                 {
                     min = Vector3.Min(min, p.V);
                     max = Vector3.Max(max, p.V);
@@ -76,6 +77,27 @@ namespace PclSharp.Test.Tutorials
                             i++;
 
                         Assert.AreEqual(350, i);
+
+                        using (var labelItr = adjacency.Begin())
+                        using (var end = adjacency.End())
+                        {
+                            for (; !labelItr.Equals(end);)
+                            {
+                                var supervoxelLabel = labelItr.Key;
+
+                                var supervoxel = clusters.At(supervoxelLabel);
+
+                                foreach (var kvp in adjacency.EqualRange(supervoxelLabel))
+                                {
+                                    var neighbor = clusters.At(kvp.Value);
+                                    adjacentSupervoxelCenters.Add(neighbor.Centroid);
+                                }
+
+                                adjacency.UpperBound(supervoxelLabel, labelItr);
+                            }
+                        }
+
+                        Assert.AreEqual(350, adjacentSupervoxelCenters.Count);
                     }
                 }
             }

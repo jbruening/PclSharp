@@ -61,14 +61,17 @@ namespace PclSharp.Std
 		<#= i.Ctor() #>
 		<#= i.Delete() #>
 
-		<#=i.FuncI("IntPtr", "begin", "IntPtr iter")#>
-		<#=i.FuncI("IntPtr", "end", "IntPtr iter")#>
+		<#=i.FuncI("void", "begin", "IntPtr iter")#>
+		<#=i.FuncI("void", "end", "IntPtr iter")#>
+		<#=i.FuncI("void", "upperBound", "csKey key, IntPtr iter")#>
+		<#=i.FuncI("void", "equal_range", "csKey key, IntPtr first, IntPtr second")#>
 
 		<#=i.FuncI("int", "size", "")#>
 
 		<#=i.Func("IntPtr", "iter_ctor", "")#>
 		<#=i.Func("void", "iter_del", "ref IntPtr iter")#>
 
+		<#=i.Func("void", "iter_assign", "IntPtr ptr, IntPtr other")#>
 		<#=i.Func("bool", "iter_equals", "IntPtr ptr, IntPtr other")#>
 		<#=i.Func("csKey", "iter_first", "IntPtr ptr")#>
 		<#=i.Func("csValue", "iter_second", "IntPtr ptr")#>
@@ -110,6 +113,21 @@ namespace PclSharp.Std
 			<#=i.InvokeI("end", "end")#>;
 			return end;
 		}
+
+		public void UpperBound(<#=csKey#> key, Iterator it)
+			=> <#=i.InvokeI("upperBound", "key, it")#>;
+
+		public IEnumerable<KeyValuePair<<#=csKey#>, <#=csValue#>>>  EqualRange(<#=csKey#> key)
+		{
+			using (var begin = new Iterator())
+			using(var end = new Iterator())
+			{
+				<#=i.InvokeI("equal_range", "key, begin, end")#>;
+
+				for(; !begin.Equals(end); begin.Increment())
+					yield return new KeyValuePair<<#=csKey#>, <#=csValue#>>(begin.Key, begin.Value);
+			}
+		}
 		
 		protected override void DisposeObject()
 		{
@@ -132,6 +150,10 @@ namespace PclSharp.Std
 
 			public bool Equals(Iterator other)
 				=> <#=i.Invoke("iter_equals", "_ptr, other")#>;
+
+			//makes this iterator equal to the other iterator
+			public void SetTo(Iterator other)
+				=> <#=i.Invoke("iter_assign", "_ptr, other")#>;
 
 			public <#=csKey#> Key
 				=> <#=i.Invoke("iter_first", "_ptr")#>;
@@ -193,11 +215,24 @@ extern "C" {
 <#=i.ExportI("void", "end", "vit* iter")#>
 { *iter = ptr->end(); }
 
+<#=i.ExportI("void", "upperBound", "cppKey key, vit* iter")#>
+{ *iter = ptr->upper_bound(key); }
+
+<#=i.ExportI("void", "equal_range", "cppKey key, vit* first, vit* second")#>
+{
+	auto range = ptr->equal_range(key);
+	*first = range.first;
+	*second = range.second;
+}
+
 <#=i.ExportI("int", "size", "")#>
 { return ptr->size(); }
 
 <#=i.Export("int", "iter_equals", "vit* ptr, vit* other")#>
 { return *ptr == *other; }
+
+<#=i.Export("void", "iter_assign", "vit* ptr, vit* other")#>
+{ *ptr = *other; }
 
 <#=i.Export("cppKey", "iter_first", "const vit* ptr")#>
 { return ptr->operator->()->first; }
