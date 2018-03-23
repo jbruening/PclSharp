@@ -5,6 +5,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
 using PclSharp.Struct;
 using System.Runtime.InteropServices;
+using static PclSharp.Test.TestData;
+using PclSharp.IO;
 
 namespace PclSharp.Test
 {
@@ -119,6 +121,21 @@ namespace PclSharp.Test
 
                 var ptr = cloud.Data;
                 Assert.AreEqual(5, ptr[55].X);
+            }
+        }
+
+        [TestMethod]
+        public void TestDownsample()
+        {
+            using (var reader = new PCDReader())
+                reader.Read(DataPath("tutorials/table_scene_mug_stereo_textured.pcd"), cloud);
+
+            using (var down = new PointCloudOfXYZ())
+            {
+                cloud.Downsample(2, down);
+
+                Assert.AreEqual(320, down.Width);
+                Assert.AreEqual(240, down.Height);
             }
         }
     }

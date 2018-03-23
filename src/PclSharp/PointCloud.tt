@@ -48,6 +48,7 @@ namespace PclSharp
 		<#= i.FuncI("unsafe csClass*", "at_colrow", "int col, int row") #>
 		<#= i.FuncI("clear") #>
 		<#= i.FuncI("unsafe void", "add", "csClass* value") #>
+		<#= i.FuncI("void", "downsample", "int factor, IntPtr output")#>
 		//properties
 		<#= i.FuncI("UIntPtr", "size", "") #>
 		<#= i.FuncI("IntPtr", "data", "") #>
@@ -113,6 +114,9 @@ namespace PclSharp
 			:this (<#=i.Invoke("ctor_indices", "cloud.Ptr, indices.Ptr")#>)
 		{
 		}
+
+		public void Downsample(int factor, PointCloud<<#=csClass#>> output)
+			=> <#=i.InvokeI("downsample", "factor, output")#>;
 
 		public override ref <#=csClass#> At(int col, int row)
 			=>  ref Unsafe.AsRef<<#=csClass#>>(<#=i.InvokeI("at_colrow", "col, row")#>);
@@ -226,6 +230,39 @@ extern "C" {  // only need to export C interface if
 <#=i.ExportI("cppClass*", "data", "")#>
 {
 	return ptr->points.data();
+}
+
+<#=i.ExportI("void", "downsample", "int factor, cppCloud* output")#>
+{
+	if (output->width != ptr->width/factor ||
+		output->height != ptr->height/factor)
+	{
+		output->resize(ptr->width/factor * ptr->height/factor);
+		output->width = ptr->width/factor;
+		output->height = ptr->height/factor;
+		output->is_dense = ptr->is_dense;
+	}
+
+	if (factor == 1)
+	{
+		output->points = ptr->points;
+		return;
+	}
+
+	auto ow = output->width;
+	auto oh = output->height;
+	auto iw = ptr->width;
+
+	auto oarr = output->points.data();
+	auto iarr = ptr->points.data();
+
+	for(size_t c = 0; c < ow; c++)
+	{
+		for(size_t r = 0; r < oh; r++)
+		{
+			oarr[r * ow + c] = iarr[r/factor * iw + c/factor];
+		}
+	}
 }
 
 <#=i.ExportI("void", "setIsDense", "int value")#>
