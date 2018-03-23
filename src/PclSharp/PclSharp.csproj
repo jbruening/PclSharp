@@ -185,6 +185,14 @@
     <Compile Include="Search\KdTreeOfXYZ.generated.cs">
       <DependentUpon>KdTree.tt</DependentUpon>
     </Compile>
+    <Compile Include="Search\OrganizedNeighbor.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganizedNeighbor.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Search\OrganizedNeighborOfXYZ.generated.cs">
+      <DependentUpon>OrganizedNeighbor.tt</DependentUpon>
+    </Compile>
     <Compile Include="Search\Search.cs" />
     <Compile Include="Segmentation\EuclideanClusterExtraction.cs">
       <AutoGen>True</AutoGen>
@@ -366,6 +374,10 @@
     <Content Include="Search\KdTree.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>KdTree.cs</LastGenOutput>
+    </Content>
+    <Content Include="Search\OrganizedNeighbor.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrganizedNeighbor.cs</LastGenOutput>
     </Content>
     <Content Include="Segmentation\EuclideanClusterExtraction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

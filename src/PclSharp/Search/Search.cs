@@ -8,6 +8,8 @@ namespace PclSharp.Search
 {
     public abstract class Search<PointT> : UnmanagedObject
     {
+        public abstract bool SortedResults { get; set; }
+
         public abstract void SetInputCloud(PointCloud<PointT> cloud);
     }
 }

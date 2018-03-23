@@ -103,5 +103,42 @@ namespace PclSharp.Test
                 }
             }
         }
+
+        [TestMethod]
+        public void OrganizedExtractionTest()
+        {
+            using (var cloud = new PointCloudOfXYZ())
+            using (var clusterIndices = new VectorOfPointIndices())
+            {
+                using (var reader = new PCDReader())
+                    reader.Read(DataPath("tutorials/table_scene_mug_stereo_textured.pcd"), cloud);
+                int organizedClusterCount;
+
+                using (var ec = new EuclideanClusterExtractionOfXYZ
+                {
+                    ClusterTolerance = 0.01,
+                    MinClusterSize = 100,
+                    MaxClusterSize = 800000
+                })
+                {
+                    using (var organized = new Search.OrganizedNeighborOfXYZ())
+                    using (var tree = new Search.KdTreeOfXYZ())
+                    {
+                        organized.SetInputCloud(cloud);
+
+                        ec.SetSearchMethod(organized);
+                        ec.Extract(clusterIndices);
+
+                        organizedClusterCount = clusterIndices.Count;
+                        clusterIndices.Clear();
+
+                        ec.SetSearchMethod(tree);
+                        ec.Extract(clusterIndices);
+
+                        Assert.AreEqual(clusterIndices.Count, organizedClusterCount, "organized neighbor cluster count did not match kdtree cluster count");
+                    }
+                }
+            }
+        }
     }
 }
