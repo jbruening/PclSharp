@@ -260,7 +260,7 @@ extern "C" {  // only need to export C interface if
 	{
 		for(size_t r = 0; r < oh; r++)
 		{
-			oarr[r * ow + c] = iarr[r/factor * iw + c/factor];
+			oarr[r * ow + c] = iarr[r * factor * iw + c * factor];
 		}
 	}
 }
