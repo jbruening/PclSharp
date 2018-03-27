@@ -11,7 +11,7 @@ namespace PclSharp.Test.Tutorials
     [TestClass]
     public class SupervoxelClustering
     {
-        //http://pointclouds.org/documentation/tutorials/statistical_outlier.php#statistical-outlier-removal
+        //http://pointclouds.org/documentation/tutorials/supervoxel_clustering.php#supervoxel-clustering
         [TestMethod]
         public unsafe void SupervoxelClusteringTutorialTest()
         {

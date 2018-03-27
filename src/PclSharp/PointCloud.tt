@@ -165,7 +165,10 @@ extern "C" {  // only need to export C interface if
 
 <#=i.Export("cppCloud*", "ctor_indices", "cppCloud* cloud, vector<int>* indices")#>
 {
-	return new <#=cppCloud#>(*cloud, *indices);
+	if (indices == NULL)
+		return new <#=cppCloud#>(*cloud);
+	else
+		return new <#=cppCloud#>(*cloud, *indices);
 }
 
 <#=i.Export("void", "delete", "cppCloud** ptr")#>

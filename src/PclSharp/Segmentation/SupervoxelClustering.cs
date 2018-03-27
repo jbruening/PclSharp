@@ -8,6 +8,10 @@ namespace PclSharp.Segmentation
 {
 	public abstract class SupervoxelClustering<PointT> : PclBase<PointT>
 	{
+		public abstract float VoxelResolution { get; set; }
+		public abstract float SeedResolution { get; set; }
+		public abstract bool UseSingleCameraTransform { set; }
+
 		public abstract void SetNormalCloud(PointCloud<Normal> cloud);
 		public abstract void Extract(SupervoxelClusters<PointT> clusters);
 		

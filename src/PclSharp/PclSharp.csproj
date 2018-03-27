@@ -202,6 +202,14 @@
     <Compile Include="Segmentation\EuclideanClusterExtractionOfXYZ.generated.cs">
       <DependentUpon>EuclideanClusterExtraction.tt</DependentUpon>
     </Compile>
+    <Compile Include="Segmentation\LCCPSegmentation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LCCPSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\LCCPSegmentationOfXYZ.generated.cs">
+      <DependentUpon>LCCPSegmentation.tt</DependentUpon>
+    </Compile>
     <Compile Include="Segmentation\SACSegmentation.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -382,6 +390,10 @@
     <Content Include="Segmentation\EuclideanClusterExtraction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EuclideanClusterExtraction.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\LCCPSegmentation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LCCPSegmentation.cs</LastGenOutput>
     </Content>
     <Content Include="Segmentation\SACSegmentation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -21,6 +21,10 @@ namespace PclSharp.Segmentation
 {
 	public abstract class SupervoxelClustering<PointT> : PclBase<PointT>
 	{
+		public abstract float VoxelResolution { get; set; }
+		public abstract float SeedResolution { get; set; }
+		public abstract bool UseSingleCameraTransform { set; }
+
 		public abstract void SetNormalCloud(PointCloud<Normal> cloud);
 		public abstract void Extract(SupervoxelClusters<PointT> clusters);
 		
@@ -67,6 +71,7 @@ namespace PclSharp.Segmentation
 		<#=i.FuncI("setColorImportance", "float value")#>
 		<#=i.FuncI("setNormalImportance", "float value")#>
 		<#=i.FuncI("setSpatialImportance", "float value")#>
+		<#=i.FuncI("setUseSingleCameraTransform", "bool value")#>
 
 		<#=i.FuncI("void", "refineSupervoxels", "int iterations, IntPtr supervoxels")#>
 
@@ -80,15 +85,18 @@ namespace PclSharp.Segmentation
 
 	public class SupervoxelClusteringOf<#=ClassName#> : SupervoxelClustering<<#=csin#>>
 	{
-		public float VoxelResolution
+		public override float VoxelResolution
 		{
 			<#=i.InvokeP("VoxelResolution", "float")#>
 		}
 
-		public float SeedResolution
+		public override float SeedResolution
 		{
 			<#=i.InvokeP("SeedResolution", "float")#>
 		}
+
+		public override bool UseSingleCameraTransform
+		{ set { <#=i.InvokeI("setUseSingleCameraTransform", "value")#>; } }
 
 		public SupervoxelClusteringOf<#=ClassName#>(float voxelResolution, float seedResolution)
 		{
@@ -208,6 +216,9 @@ extern "C" {
 
 <#=i.ExportI("void", "setSpatialImportance", "float value")#>
 { ptr->setSpatialImportance(value); }
+
+<#=i.ExportI("void", "setUseSingleCameraTransform", "int value")#>
+{ ptr->setUseSingleCameraTransform(value); }
 
 <#=i.ExportP("VoxelResolution", "float")#>
 
