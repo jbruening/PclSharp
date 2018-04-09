@@ -50,7 +50,7 @@ namespace PclSharp.Struct
         public fixed float data_c[4];
     }
 
-    [DebuggerDisplay("{NormalX}, {NormalY}, {NormalZ}, {Curvature}")]
+    [DebuggerDisplay("{N}, {Curvature}")]
     [StructLayout(LayoutKind.Explicit, Size = 32)]
     public unsafe struct Normal
     {
@@ -63,12 +63,16 @@ namespace PclSharp.Struct
         [FieldOffset(0)]
         public fixed float data_n[4];
 
+        [FieldOffset(0)]
+        public Vector3 N;
+
         [FieldOffset(16)]
         public float Curvature;
         [FieldOffset(16)]
         public fixed float data_c[4];
     }
 
+    [DebuggerDisplay("{V}, N:({NormalX}, {NormalY}, {NormalZ}, {Curvature})")]
     [StructLayout(LayoutKind.Explicit, Size = 48)]
     public unsafe struct PointNormal
     {
@@ -99,6 +103,7 @@ namespace PclSharp.Struct
         public fixed float data_c[4];
     }
 
+    [DebuggerDisplay("{V}, {Label}")]
     [StructLayout(LayoutKind.Explicit, Size = 32)]
     public unsafe struct PointXYZL
     {
