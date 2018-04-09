@@ -247,7 +247,7 @@ extern "C" {
 
 <#=i.ExportI("void", "at", "size_t idx, cppClass* value")#>
 {
-	value = &ptr->at(idx);
+	*value = ptr->at(idx);
 }
 
 <#=i.ExportI("size_t", "size", "")#>
