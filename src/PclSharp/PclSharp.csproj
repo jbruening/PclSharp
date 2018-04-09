@@ -228,6 +228,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SupervoxelClustering.tt</DependentUpon>
     </Compile>
+    <Compile Include="Segmentation\SupervoxelClusteringOfXYZ.generated.cs">
+      <DependentUpon>SupervoxelClustering.tt</DependentUpon>
+    </Compile>
     <Compile Include="Segmentation\SupervoxelClusteringOfXYZRGBA.generated.cs">
       <DependentUpon>SupervoxelClustering.tt</DependentUpon>
     </Compile>
@@ -236,8 +239,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SupervoxelClusters.tt</DependentUpon>
     </Compile>
+    <Compile Include="Segmentation\SupervoxelClustersOfXYZ.generated.cs">
+      <DependentUpon>SupervoxelClusters.tt</DependentUpon>
+    </Compile>
     <Compile Include="Segmentation\SupervoxelClustersOfXYZRGBA.generated.cs">
       <DependentUpon>SupervoxelClusters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\SupervoxelOfXYZ.generated.cs">
+      <DependentUpon>Supervoxel.tt</DependentUpon>
     </Compile>
     <Compile Include="Segmentation\SupervoxelOfXYZRGBA.generated.cs">
       <DependentUpon>Supervoxel.tt</DependentUpon>
