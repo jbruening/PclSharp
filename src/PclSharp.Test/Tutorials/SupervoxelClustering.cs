@@ -60,9 +60,9 @@ namespace PclSharp.Test.Tutorials
                     super.SetInputCloud(cloud);
                     super.SetNormalCloud(normals);
 
-                    super.SetColorImportance(colorImportance);
-                    super.SetSpatialImportance(spatialImportance);
-                    super.SetNormalImportance(normalImportance);
+                    super.ColorImportance = colorImportance;
+                    super.SpatialImportance = spatialImportance;
+                    super.NormalImportance = normalImportance;
 
                     super.Extract(clusters);
                     Assert.IsTrue(clusters.Count > 0);

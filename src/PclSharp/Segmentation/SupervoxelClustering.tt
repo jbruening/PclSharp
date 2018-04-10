@@ -25,13 +25,12 @@ namespace PclSharp.Segmentation
 		public abstract float VoxelResolution { get; set; }
 		public abstract float SeedResolution { get; set; }
 		public abstract bool UseSingleCameraTransform { set; }
+		public abstract float ColorImportance { set; }
+        public abstract float NormalImportance { set; }
+        public abstract float SpatialImportance { set; }
 
 		public abstract void SetNormalCloud(PointCloud<Normal> cloud);
 		public abstract void Extract(SupervoxelClusters<PointT> clusters);
-		
-		public abstract void SetColorImportance(float value);
-		public abstract void SetNormalImportance(float value);
-		public abstract void SetSpatialImportance(float value);
 
 		public abstract void RefineSupervoxels(int iterations, SupervoxelClusters<PointT> clusters);
 
@@ -99,6 +98,15 @@ namespace PclSharp.Segmentation
 		public override bool UseSingleCameraTransform
 		{ set { <#=i.InvokeI("setUseSingleCameraTransform", "value")#>; } }
 
+		public override float ColorImportance
+		{ set { <#=i.InvokeI("setColorImportance", "value")#>; } }
+
+		public override float NormalImportance
+		{ set { <#=i.InvokeI("setNormalImportance", "value")#>; } }
+
+		public override float SpatialImportance
+		{ set { <#=i.InvokeI("setSpatialImportance", "value")#>; } }
+
 		public SupervoxelClusteringOf<#=ClassName#>(float voxelResolution, float seedResolution)
 		{
 			_ptr = <#=i.Invoke("ctor", "voxelResolution, seedResolution")#>;
@@ -114,15 +122,6 @@ namespace PclSharp.Segmentation
 
 		public override void SetNormalCloud(PointCloud<Normal> cloud)
 			=> <#=i.InvokeI("setNormalCloud", "cloud")#>;
-
-		public override void SetColorImportance(float value)
-			=> <#=i.InvokeI("setColorImportance", "value")#>;
-
-		public override void SetNormalImportance(float value)
-			=> <#=i.InvokeI("setNormalImportance", "value")#>;
-
-		public override void SetSpatialImportance(float value)
-			=> <#=i.InvokeI("setSpatialImportance", "value")#>;
 
 		public override void Extract(SupervoxelClusters<<#=csin#>> clusters)
 		{

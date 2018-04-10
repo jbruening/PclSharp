@@ -11,13 +11,12 @@ namespace PclSharp.Segmentation
 		public abstract float VoxelResolution { get; set; }
 		public abstract float SeedResolution { get; set; }
 		public abstract bool UseSingleCameraTransform { set; }
+		public abstract float ColorImportance { set; }
+        public abstract float NormalImportance { set; }
+        public abstract float SpatialImportance { set; }
 
 		public abstract void SetNormalCloud(PointCloud<Normal> cloud);
 		public abstract void Extract(SupervoxelClusters<PointT> clusters);
-		
-		public abstract void SetColorImportance(float value);
-		public abstract void SetNormalImportance(float value);
-		public abstract void SetSpatialImportance(float value);
 
 		public abstract void RefineSupervoxels(int iterations, SupervoxelClusters<PointT> clusters);
 
