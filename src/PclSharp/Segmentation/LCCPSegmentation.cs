@@ -19,5 +19,7 @@ namespace PclSharp.Segmentation
 		public abstract void Segment();
 
 		public abstract void RelabelCloud(PointCloud<PointXYZL> labeledCloud);
+
+		public abstract void Reset();
 	}
 }

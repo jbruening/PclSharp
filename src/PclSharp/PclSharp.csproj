@@ -194,6 +194,14 @@
       <DependentUpon>OrganizedNeighbor.tt</DependentUpon>
     </Compile>
     <Compile Include="Search\Search.cs" />
+    <Compile Include="Segmentation\CPCSegmentation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CPCSegmentation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmentation\CPCSegmentationOfXYZ.generated.cs">
+      <DependentUpon>CPCSegmentation.tt</DependentUpon>
+    </Compile>
     <Compile Include="Segmentation\EuclideanClusterExtraction.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -395,6 +403,10 @@
     <Content Include="Search\OrganizedNeighbor.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OrganizedNeighbor.cs</LastGenOutput>
+    </Content>
+    <Content Include="Segmentation\CPCSegmentation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CPCSegmentation.cs</LastGenOutput>
     </Content>
     <Content Include="Segmentation\EuclideanClusterExtraction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
