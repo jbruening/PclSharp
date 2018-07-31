@@ -87,6 +87,11 @@
       <DependentUpon>PCA.tt</DependentUpon>
     </Compile>
     <Compile Include="Eigen\Vector3i.cs" />
+    <Compile Include="Eigen\Matrix4.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Matrix4.tt</DependentUpon>
+    </Compile>
     <Compile Include="Eigen\VectorXf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -354,6 +359,10 @@
     <Content Include="Common\PCA.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PCA.cs</LastGenOutput>
+    </Content>
+    <Content Include="Eigen\Matrix4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Matrix4.cs</LastGenOutput>
     </Content>
     <Content Include="Eigen\VectorXf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

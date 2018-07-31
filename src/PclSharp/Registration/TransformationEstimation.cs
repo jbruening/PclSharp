@@ -1,7 +1,7 @@
 ﻿
-namespace PclSharp.Segmentation
+namespace PclSharp.Registration
 {
-	public abstract class TransformationEstimation<PointSource, PointTarget>
+	public class TransformationEstimation<PointSource, PointTarget>
 	{
 	}
 }
