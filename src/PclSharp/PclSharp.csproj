@@ -78,6 +78,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelCoefficients.tt</DependentUpon>
     </Compile>
+    <Compile Include="Common\PCA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\PCAOfXYZ.generated.cs">
+      <DependentUpon>PCA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Eigen\Vector3i.cs" />
     <Compile Include="Eigen\VectorXf.cs">
       <AutoGen>True</AutoGen>
@@ -168,6 +176,20 @@
       <DependentUpon>PolygonMesh.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\ICP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\Registration.cs" />
+    <Compile Include="Registration\TransformationEstimation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransformationEstimation.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\TransformationEstimationOfPointXYZ_PointXYZ.generated.cs">
+      <DependentUpon>TransformationEstimation.tt</DependentUpon>
+    </Compile>
     <Compile Include="SampleConsensus\SampleConsensusModel.cs" />
     <Compile Include="SampleConsensus\SampleConsensusModelPlaneOfXYZ.generated.cs">
       <DependentUpon>SampleConsensusModelPlane.tt</DependentUpon>
@@ -329,6 +351,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelCoefficients.cs</LastGenOutput>
     </Content>
+    <Content Include="Common\PCA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PCA.cs</LastGenOutput>
+    </Content>
     <Content Include="Eigen\VectorXf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorXf.cs</LastGenOutput>
@@ -391,6 +417,14 @@
     <Content Include="PolygonMesh.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PolygonMesh.cs</LastGenOutput>
+    </Content>
+    <Content Include="Registration\ICP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ICP.cs</LastGenOutput>
+    </Content>
+    <Content Include="Registration\TransformationEstimation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TransformationEstimation.cs</LastGenOutput>
     </Content>
     <Content Include="SampleConsensus\SampleConsensusModelPlane.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

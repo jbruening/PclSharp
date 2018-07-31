@@ -32,6 +32,9 @@
     <ClCompile Include="filters\*.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+	<ClCompile Include="registration\*.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
     <ClCompile Include="io\*.h">
       <Filter>Header Files</Filter>
     </ClCompile>
