@@ -8,26 +8,24 @@
 <#@include file="..\InvokeTemplate.ttinclude"#>
 <# 
 	var manager = Manager.Create(Host, GenerationEnvironment);
-	outputClass(manager, "PointXYZ", "PointXYZ", "PointXYZ", "PointXYZ");
+	outputClass(manager, "PointNormal", "PointNormal", "PointNormal", "PointNormal");
 	manager.Process(true);
 #>
-
 namespace PclSharp.Registration
 {
-	public class TransformationEstimation<PointSource, PointTarget>
+	public class TransformationEstimationPointToPlane<PointSource, PointTarget>
 	{
 	}
 }
-
 <#+ void outputClass(Manager manager, string css, string cps, string cst, string cpt)
 { 
 	var ClassName = css + "_" + cst;
 	var classname = ClassName.ToLower();
 	var classFunc = "registration_transformationEstimation_" + classname;
 	
-	var cppWrapper = "TransformationEstimation<"+cps+", "+cpt+">";
+	var cppWrapper = "TransformationEstimationPointToPlaneLLS<"+cps+", "+cpt+">";
 
-	manager.StartNewFile("TransformationEstimationOf"+ClassName+".generated.cs");
+	manager.StartNewFile("TransformationEstimationPointToPlaneLLSOf"+ClassName+".generated.cs");
 	var i = new InvokeT(classFunc, css, cppWrapper);
 	i.Var("cps", cps);
 	i.Var("cpt", cpt);
@@ -36,28 +34,31 @@ namespace PclSharp.Registration
 
 <#+ 
 	manager.EndBlock(); 
-	manager.StartNewFile("..\\..\\PclSharp.Extern\\registration\\TransformationEstimationOf"+ClassName+".generated.h");
+	manager.StartNewFile("..\\..\\PclSharp.Extern\\registration\\TransformationEstimationPointToPlaneLLSOf"+ClassName+".generated.cpp");
 #>
 #pragma once
 #include "..\export.h"
 
 #include <pcl/point_types.h>
-#include <pcl/registration/transformation_estimation.h>
+#include <pcl/registration/transformation_estimation_point_to_plane_lls.h>
 
 using namespace pcl;
+using namespace pcl::registration;
 using namespace std;
 
 typedef boost::shared_ptr<PointCloud<<#=cps#>>> boost_src;
 typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef Eigen::Matrix<float, 4, 4> Matrix4;
+typedef <#=cppWrapper#> classType;
 
 #ifdef __cplusplus
 extern "C" {
 #endif 
 
-<#=i.Export("cppWrapper*", "ctor", "")#>
-{ return new <#=cppWrapper#>(); }
+<#=i.Export("classType*", "ctor", "")#>
+{ return new classType(); }
 
-<#=i.Export("void", "delete", "cppWrapper** ptr")#>
+<#=i.Export("void", "delete", "classType** ptr")#>
 {
 	delete *ptr;
 	*ptr = NULL;

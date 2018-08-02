@@ -187,13 +187,13 @@
       <DependentUpon>ICP.tt</DependentUpon>
     </Compile>
     <Compile Include="Registration\Registration.cs" />
-    <Compile Include="Registration\TransformationEstimation.cs">
+    <Compile Include="Registration\TransformationEstimationPointToPlaneLLS.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TransformationEstimation.tt</DependentUpon>
+      <DependentUpon>TransformationEstimationPointToPlaneLLS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Registration\TransformationEstimationOfPointXYZ_PointXYZ.generated.cs">
-      <DependentUpon>TransformationEstimation.tt</DependentUpon>
+    <Compile Include="Registration\TransformationEstimationPointToPlaneLLSOfPointNormal_PointNormal.generated.cs">
+      <DependentUpon>TransformationEstimationPointToPlaneLLS.tt</DependentUpon>
     </Compile>
     <Compile Include="SampleConsensus\SampleConsensusModel.cs" />
     <Compile Include="SampleConsensus\SampleConsensusModelPlaneOfXYZ.generated.cs">
@@ -431,9 +431,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ICP.cs</LastGenOutput>
     </Content>
-    <Content Include="Registration\TransformationEstimation.tt">
+    <Content Include="Registration\TransformationEstimationPointToPlaneLLS.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TransformationEstimation.cs</LastGenOutput>
+      <LastGenOutput>TransformationEstimationPointToPlaneLLS.cs</LastGenOutput>
     </Content>
     <Content Include="SampleConsensus\SampleConsensusModelPlane.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

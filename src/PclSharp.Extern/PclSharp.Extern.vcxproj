@@ -124,21 +124,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="export.h" />
+    <ClInclude Include="filters\HeightMap2D.hpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="filters\HeightMap2D.hpp" />
-    <ClCompile Include="PointSizes.h" />
-    <ClCompile Include="common\*.h" />
-    <ClCompile Include="eigen\*.h" />
-    <ClCompile Include="features\*.h" />
-    <ClCompile Include="filters\*.h" />
-    <ClCompile Include="io\*.h" />
-    <ClCompile Include="pointcloud\*.h" />
-    <ClCompile Include="sampleconsensus\*.h" />
-    <ClCompile Include="search\*.h" />
-    <ClCompile Include="segmentation\*.h" />
-    <ClCompile Include="std\*.h" />
-    <ClCompile Include="surface\*.h" />
+  <ItemGroup>    
+    <ClCompile Include="PointSizes.cpp" />
+    <ClCompile Include="common\*.cpp" />
+    <ClCompile Include="eigen\*.cpp" />
+    <ClCompile Include="features\*.cpp" />
+    <ClCompile Include="filters\*.cpp" />
+    <ClCompile Include="io\*.cpp" />
+    <ClCompile Include="pointcloud\*.cpp" />
+    <ClCompile Include="sampleconsensus\*.cpp" />
+    <ClCompile Include="search\*.cpp" />
+    <ClCompile Include="segmentation\*.cpp" />
+    <ClCompile Include="std\*.cpp" />
+    <ClCompile Include="surface\*.cpp" />
+    <ClCompile Include="registration\*.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,27 +16,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="export.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pointcloud\*.h">
-      <Filter>Header Files</Filter>
+	<ClCompile Include="common\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="std\*.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="pointcloud\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pointcloud\*.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="std\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="filters\*.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="pointcloud\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-	<ClCompile Include="registration\*.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="filters\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="io\*.h">
-      <Filter>Header Files</Filter>
+	<ClCompile Include="registration\*.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
