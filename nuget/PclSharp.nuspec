@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>PclSharp</id>
+        <version>1.8.1.20180817-beta03</version>
+        <title>PclSharp</title>
+		<authors>Justin Bruening</authors>
+		<owners>Justin Bruening</owners>
+        <licenseUrl>https://github.com/PointCloudLibrary/pcl/blob/master/LICENSE.txt</licenseUrl>
+		<projectUrl>https://github.com/jbruening/PclSharp</projectUrl>
+		<description>.NET Bindings for the Point Cloud Library https://github.com/PointCloudLibrary/pcl</description>
+		<tags>pcl point cloud binding pinvoke</tags>
+		<repository type="git" url="https://github.com/jbruening/PclSharp" />
+        <dependencies>
+            <group targetFramework="net452">
+				<dependency id="System.Numerics.Vectors" version="4.4.0" exclude="Build,Analyzers" />
+				<dependency id="System.Runtime.CompilerServices.Unsafe" version="4.4.0" exclude="Build,Analyzers" />
+				<dependency id="System.ValueTuple" version="4.4.0" exclude="Build,Analyzers" />
+			</group>
+        </dependencies>
+    </metadata>
+    <files>
+		<file src="PclSharp.targets" target="build\PclSharp.targets" />
+
+        <file src="..\bin\x64\Release\PclSharp.dll" target="lib\net452" />
+		<file src="..\bin\x64\Release\PclSharp.pdb" target="lib\net452" />
+		<file src="..\bin\x64\Release\PclSharp.xml" target="lib\net452" />
+		
+		<file src="..\bin\x64\Release\PclSharp.Extern.dll" target="build\x64" />
+		<file src="..\bin\x64\pcl_libs\*.dll" target="build\x64" />
+    </files>
+</package>

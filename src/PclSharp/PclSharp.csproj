@@ -344,6 +344,7 @@
     <Compile Include="Surface\MeshConstruction.cs" />
     <Compile Include="Surface\SurfaceBase.cs" />
     <Compile Include="UnmanagedObject.cs" />
+    <Compile Include="Utils\LibraryLoader.cs" />
     <Compile Include="Utils\PointSizes.cs" />
   </ItemGroup>
   <ItemGroup>
