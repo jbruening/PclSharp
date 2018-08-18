@@ -12,21 +12,20 @@ namespace PclSharp.Utils
     {
         static readonly string[] AdditionalLibraries = new[]
         {
-            "PclSharp.ExternVis",
             //maybe people like copying the libraries to the same folder, rather than properly installing it.
             "OpenNI2",
             "pcl_common_release",
-            "pcl_features_release",
-            "pcl_filters_release",
+            "pcl_sample_consensus_release",
             "pcl_io_ply_release",
             "pcl_io_release",
-            "pcl_kdtree_release",
-            "pcl_ml_release",
             "pcl_octree_release",
-            "pcl_sample_consensus_release",
+            "pcl_kdtree_release",
             "pcl_search_release",
+            "pcl_filters_release",
+            "pcl_features_release",
+            "pcl_ml_release",
             "pcl_segmentation_release",
-            "pcl_visualization_release",
+            "pcl_surface_release",
         };
 
         internal static void LoadLibraries()
