@@ -186,7 +186,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ICP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Registration\IterativeClosestPointOfPointXYZ_PointXYZ.generated.cs">
+      <DependentUpon>ICP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Registration\Registration.cs" />
+    <Compile Include="Registration\TransformationEstimation.cs" />
     <Compile Include="Registration\TransformationEstimationPointToPlaneLLS.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

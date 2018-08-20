@@ -8,6 +8,187 @@
 <#@include file="..\InvokeTemplate.ttinclude"#>
 <# 
 	var manager = Manager.Create(Host, GenerationEnvironment);
-	//outputClass(manager, "XYZ", "PointXYZ", "PointXYZ");
+	outputClass(manager, "PointXYZ", "PointXYZ", "PointXYZ", "PointXYZ");
 	manager.Process(true);
 #>
+namespace PclSharp.Registration
+{
+	public abstract class IterativeClosestPoint<PointSource, PointTarget> : Registration<PointSource, PointTarget>
+	{
+		public abstract bool UseReciprocalCorrespondences { get; set; }
+	}
+}
+<#+ void outputClass(Manager manager, string css, string cps, string cst, string cpt)
+{ 
+	var ClassName = css + "_" + cst;
+	var classname = ClassName.ToLower();
+	var classFunc = "registration_icp_" + classname;
+	
+	var cppWrapper = "IterativeClosestPoint<"+cps+", "+cpt+">";
+
+	manager.StartNewFile("IterativeClosestPointOf"+ClassName+".generated.cs");
+	var i = new InvokeT(classFunc, css, cppWrapper);
+	i.Var("cps", cps);
+	i.Var("cpt", cpt);
+	i.Var("cppWrapper", cppWrapper);
+#>
+using System;
+using System.Runtime.InteropServices;
+using PclSharp.Struct;
+using PclSharp.Eigen;
+using PclSharp.Std;
+
+namespace PclSharp.Registration
+{
+	public static partial class Invoke
+	{
+		<#= i.Ctor() #>
+		<#= i.Delete() #>
+
+		//methods
+		<#= i.FuncI("void", "align", "IntPtr output") #>
+		<#= i.FuncI("void", "alignGuess", "IntPtr output, IntPtr guess") #>
+
+		//properties
+		<#=i.Prop("MaximumIterations", "int")#>
+		<#=i.Prop("UseReciprocalCorrespondences", "bool")#>
+		<#=i.Prop("MaxCorrespondenceDistance", "double")#>
+		<#=i.Prop("RANSACOutlierRejectionThreshold", "double")#>
+		<#=i.Prop("TransformationEpsilon", "double")#>
+		<#=i.Prop("EuclideanFitnessEpsilon", "double")#>
+		<#=i.Prop("InputSource", "IntPtr")#>
+		<#=i.Prop("InputTarget", "IntPtr")#>
+	}
+
+	public class IterativeClosestPointOf<#=ClassName#> : IterativeClosestPoint<<#=css#>, <#=cst#>>
+	{
+		public override int MaximumIterations
+		{ 
+			<#=i.InvokeP("MaximumIterations", "int")#> 
+		}
+		public override bool UseReciprocalCorrespondences
+		{ 
+			<#=i.InvokeP("UseReciprocalCorrespondences", "bool")#> 
+		}
+        public override double MaxCorrespondenceDistance
+		{
+			<#=i.InvokeP("MaxCorrespondenceDistance", "double")#> 
+		}
+        public override double RANSACOutlierRejectionThreshold
+		{
+			<#=i.InvokeP("RANSACOutlierRejectionThreshold", "double")#> 
+		}
+        public override double TransformationEpsilon
+		{
+			<#=i.InvokeP("TransformationEpsilon", "double")#> 
+		}
+        public override double EuclideanFitnessEpsilon
+		{
+			<#=i.InvokeP("EuclideanFitnessEpsilon", "double")#> 
+		}
+        public override PointCloud<<#=css#>> InputSource
+		{
+			get { return new PointCloudOf<#=css.Substring(5, css.Length - 5)#>(<#=i.InvokeI("getInputSource")#>, true); }
+			set { <#=i.InvokeI("setInputSource", "value")#>; }
+		}
+        public override PointCloud<<#=css#>> InputTarget
+		{
+			get { return new PointCloudOf<#=css.Substring(5, css.Length - 5)#>(<#=i.InvokeI("getInputTarget")#>, true); }
+			set { <#=i.InvokeI("setInputTarget", "value")#>; }
+		}
+
+		public override double TransformationRotationEpsilon
+		{
+			get => throw new NotImplementedException();
+			set => throw new NotImplementedException();
+		}
+
+        public override void Align(PointCloud<<#=css#>> output)
+			=> <#=i.InvokeI("align", "output")#>;
+
+        public override void Align(PointCloud<<#=css#>> output, Matrix4f guess)
+			=> <#=i.InvokeI("alignGuess", "output, guess")#>;
+
+        public override void SetIndices(VectorOfInt indices)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetInputCloud(PointCloud<PointXYZ> cloud)
+        {
+            this.InputSource = cloud;
+        }
+
+		public override ref <#=css#> this[int idx]
+		{
+			get { return ref this.Index(idx); }
+		}
+
+        protected override void DisposeObject()
+		{
+			<#=i.DeleteI()#>;
+		}
+	}
+}
+<#+ 
+	manager.EndBlock(); 
+	manager.StartNewFile("..\\..\\PclSharp.Extern\\registration\\IterativeClosestPointOf"+ClassName+".generated.cpp");
+#>
+#pragma once
+#include "..\export.h"
+
+#include <pcl/point_types.h>
+#include <pcl/registration/icp.h>
+
+using namespace pcl;
+using namespace pcl::registration;
+using namespace std;
+
+typedef boost::shared_ptr<PointCloud<<#=cps#>>> boost_src;
+typedef boost::shared_ptr<PointCloud<<#=cpt#>>> boost_tgt;
+typedef boost::shared_ptr<vector<int>> boost_indices;
+typedef Eigen::Matrix<float, 4, 4> Matrix4;
+typedef <#=cppWrapper#> classType;
+
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
+<#=i.Export("classType*", "ctor", "")#>
+{ return new classType(); }
+
+<#=i.Export("void", "delete", "classType** ptr")#>
+{
+	delete *ptr;
+	*ptr = NULL;
+}
+
+<#=i.ExportI("void", "align", "PointCloud<cps>* output")#>
+{ ptr->align(*output); }
+<#=i.ExportI("void", "alignGuess", "PointCloud<cps>* output, Matrix4* guess")#>
+{ ptr->align(*output, *guess); }
+
+<#=i.ExportP("MaximumIterations", "int")#>
+<#=i.ExportP("UseReciprocalCorrespondences", "int")#>
+<#=i.ExportP("MaxCorrespondenceDistance", "double")#>
+<#=i.ExportP("RANSACOutlierRejectionThreshold", "double")#>
+<#=i.ExportP("TransformationEpsilon", "double")#>
+<#=i.ExportP("EuclideanFitnessEpsilon", "double")#>
+
+<#=i.ExportI("void", "setInputSource", "PointCloud<cps>* cloud")#>
+{ ptr->setInputSource(boost_src(boost_src(), cloud)); }
+
+<#=i.ExportI("PointCloud<cps>*", "getInputSource", "")#>
+{ return boost::const_pointer_cast<PointCloud<<#=cps#>>>(ptr->getInputSource()).get(); }
+
+
+<#=i.ExportI("void", "setInputTarget", "PointCloud<cpt>* cloud")#>
+{ ptr->setInputTarget(boost_tgt(boost_tgt(), cloud)); }
+
+<#=i.ExportI("PointCloud<cps>*", "getInputTarget", "")#>
+{ return boost::const_pointer_cast<PointCloud<<#=cpt#>>>(ptr->getInputTarget()).get(); }
+
+#ifdef __cplusplus  
+}
+#endif  
+<#+	i.Dispose(); manager.EndBlock(false); }#>

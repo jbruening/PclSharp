@@ -1,6 +1,6 @@
 ﻿namespace PclSharp.Registration
 {
-	public class TransformationEstimationPointToPlane<PointSource, PointTarget>
+	public abstract class TransformationEstimationPointToPlane<PointSource, PointTarget> : TransformationEstimation<PointSource, PointTarget>
 	{
 	}
 }
